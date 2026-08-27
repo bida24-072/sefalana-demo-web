@@ -15,4 +15,337 @@
 
   <!-- ============================================ -->
   <!-- CUSTOM STYLES                                -->
-  /* =
+  /* ============================================ */
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f8fafc;
+    }
+
+    /* ----- BRAND COLORS ----- */
+    .bg-sef-navy {
+      background: #0b1a2f;
+    }
+    .text-gold {
+      color: #fbbf24;
+    }
+
+    /* ----- BUTTON STYLES ----- */
+    .btn-primary {
+      background: #0b1a2f;
+      color: white;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #1a2f4a;
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: #fbbf24;
+      color: #0b1a2f;
+      transition: 0.2s;
+    }
+    .btn-gold:hover {
+      background: #f59e0b;
+      transform: translateY(-2px);
+    }
+
+    /* ----- HOVER EFFECTS ----- */
+    .hover-scale {
+      transition: all 0.2s ease;
+    }
+    .hover-scale:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ----- IMAGE HOVER ZOOM ----- */
+    .store-image-container {
+      overflow: hidden;
+    }
+    .store-image-container img {
+      transition: transform 0.4s ease;
+    }
+    .store-image-container:hover img {
+      transform: scale(1.06);
+    }
+
+    /* ============================================ */
+    /* BACKGROUND IMAGE (YEARS of creating value)   */
+    /* The SVG creates a repeating "YEARS" pattern  */
+    /* ============================================ */
+    .bg-store-hero {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMwYjFhMmYiLz48dGV4dCB4PSI2IiB5PSIyNCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNmYmJmMjQiPllFQVJTIDwvdGV4dD48L3N2Zz4=');
+      background-repeat: repeat;
+      background-size: 60px 60px;
+      background-blend-mode: overlay;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
+  /* ============================================ */
+  <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- ----- LOGO SECTION ----- -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
+            <span class="text-sef-navy font-extrabold text-xl">S</span>
+          </div>
+          <div>
+            <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
+            <span class="block text-[10px] uppercase tracking-[0.2em] text-gold font-medium">Shopper</span>
+          </div>
+        </div>
+
+        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
+          <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
+          <a href="store-locator.html" class="text-white/90 hover:text-gold transition">Store Locator</a>
+          <a href="b2b.html" class="text-white/90 hover:text-gold transition">B2B Supplier</a>
+          <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin</a>
+          <a href="cart.html" class="relative text-white/90 hover:text-gold transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">3</span>
+          </a>
+        </div>
+
+        <!-- ----- MOBILE MENU BUTTON ----- -->
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
+      <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
+      <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
+      <a href="store-locator.html" class="block py-2 hover:text-gold transition">Store Locator</a>
+      <a href="b2b.html" class="block py-2 hover:text-gold transition">B2B Supplier</a>
+      <a href="admin.html" class="block py-2 text-gold font-semibold">Admin</a>
+      <a href="cart.html" class="block py-2 hover:text-gold transition">Cart</a>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- HERO WITH BACKGROUND IMAGE (YEARS pattern)   -->
+  /* ============================================ */
+  <section class="py-16 relative bg-sef-navy text-white">
+    <!-- The background pattern shows "YEARS" repeated -->
+    <div class="absolute inset-0 bg-store-hero opacity-20"></div>
+    <div class="relative max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold">Find a Sefalana Store</h1>
+      <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
+      <p class="text-gray-300 max-w-2xl mx-auto">With stores across Botswana, there's always a Sefalana nearby.</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SEARCH & FILTERS                             -->
+  /* ============================================ */
+  <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gray-50 rounded-xl shadow-lg p-6 mb-10 border border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Search Input -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Search</label>
+          <input type="text" id="storeSearch" oninput="filterStores()" placeholder="Search by name or address..." class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+        </div>
+        <!-- City Filter -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">City</label>
+          <select id="cityFilter" onchange="filterStores()" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+            <option value="">All Cities</option>
+            <option value="Gaborone">Gaborone</option>
+            <option value="Francistown">Francistown</option>
+            <option value="Maun">Maun</option>
+            <option value="Broadhurst">Broadhurst</option>
+            <option value="Mogoditshane">Mogoditshane</option>
+            <option value="Selebi-Phikwe">Selebi-Phikwe</option>
+          </select>
+        </div>
+        <!-- Format Filter -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Store Format</label>
+          <select id="formatFilter" onchange="filterStores()" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+            <option value="">All Formats</option>
+            <option value="Sefalana Hyper">Sefalana Hyper</option>
+            <option value="Sefalana Shopper">Sefalana Shopper</option>
+            <option value="Cash & Carry">Cash & Carry</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STORE GRID ===== -->
+    <div id="storesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Rendered by JavaScript -->
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  /* ============================================ */
+  <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   */
+  /* ============================================ -->
+  <script>
+    // =============================================
+    // DATA STORE - List of all store locations
+    // =============================================
+    const stores = [{
+      id: 1,
+      name: 'Sefalana Hyper Gaborone',
+      format: 'Sefalana Hyper',
+      address: 'Plot 54376, Gaborone West',
+      city: 'Gaborone',
+      phone: '+267 391 4222',
+      hours: 'Mon-Fri 07:00-19:00, Sat 07:00-17:00',
+      image: 'https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=400&auto=format&fit=crop'
+    }, {
+      id: 2,
+      name: 'Sefalana Shopper Main Mall',
+      format: 'Sefalana Shopper',
+      address: 'Main Mall, Gaborone',
+      city: 'Gaborone',
+      phone: '+267 397 2153',
+      hours: 'Mon-Fri 08:00-18:00, Sat 08:00-16:00',
+      image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=400&auto=format&fit=crop'
+    }, {
+      id: 3,
+      name: 'Sefalana Cash & Carry Francistown',
+      format: 'Cash & Carry',
+      address: 'Plot 2145, Light Industrial',
+      city: 'Francistown',
+      phone: '+267 241 2278',
+      hours: 'Mon-Fri 07:30-18:30, Sat 08:00-16:00',
+      image: 'https://images.unsplash.com/photo-1583258292688-d02187dcbea8?q=80&w=400&auto=format&fit=crop'
+    }, {
+      id: 4,
+      name: 'Sefalana Shopper Broadhurst',
+      format: 'Sefalana Shopper',
+      address: 'Plot 1058, Broadhurst Mall',
+      city: 'Broadhurst',
+      phone: '+267 393 7645',
+      hours: 'Mon-Fri 08:00-19:00, Sat 08:00-17:00',
+      image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=400&auto=format&fit=crop'
+    }, {
+      id: 5,
+      name: 'Sefalana Hyper Maun',
+      format: 'Sefalana Hyper',
+      address: 'Plot 78, Maun Industrial',
+      city: 'Maun',
+      phone: '+267 686 0492',
+      hours: 'Mon-Fri 07:30-19:00, Sat 08:00-16:00',
+      image: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=400&auto=format&fit=crop'
+    }, {
+      id: 6,
+      name: 'Sefalana Cash & Carry Mogoditshane',
+      format: 'Cash & Carry',
+      address: 'Plot 3928, Mogoditshane',
+      city: 'Mogoditshane',
+      phone: '+267 318 9311',
+      hours: 'Mon-Fri 07:00-18:30, Sat 08:00-16:00',
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400&auto=format&fit=crop'
+    }];
+
+    // =============================================
+    // RENDER FUNCTION
+    // =============================================
+
+    // Function to display stores on the page
+    function renderStores(list) {
+      const grid = document.getElementById('storesGrid');
+
+      // Check if there are any stores to display
+      if (!list.length) {
+        grid.innerHTML = '<div class="col-span-full text-center py-8 text-gray-500">No stores found matching your criteria.</div>';
+        return;
+      }
+
+      // Generate HTML for each store
+      grid.innerHTML = list.map(s => `
+          <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+            <div class="store-image-container h-48">
+              <img src="${s.image}" alt="${s.name}" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-sef-navy">${s.name}</h3>
+              <span class="inline-block bg-sef-navy text-white text-xs px-3 py-1 rounded-full mt-1">${s.format}</span>
+              <p class="text-sm text-gray-600 mt-2">${s.address}</p>
+              <p class="text-sm font-medium">${s.city}</p>
+              <p class="text-sm">📞 ${s.phone}</p>
+              <p class="text-xs text-gray-400 mt-1">🕐 ${s.hours}</p>
+              <button onclick="alert('Store: ${s.name}\\n${s.address}\\n${s.hours}')" class="mt-3 w-full bg-sef-navy text-white py-2 rounded-lg text-sm font-medium hover:bg-[#1a2f4a] transition">View Details</button>
+            </div>
+          </div>
+        `).join('');
+    }
+
+    // =============================================
+    // FILTER FUNCTION
+    // =============================================
+
+    // Function to filter stores based on search and dropdowns
+    function filterStores() {
+      // Get values from input fields
+      const searchTerm = document.getElementById('storeSearch').value.toLowerCase().trim();
+      const cityFilter = document.getElementById('cityFilter').value;
+      const formatFilter = document.getElementById('formatFilter').value;
+
+      // Filter the stores array
+      const filtered = stores.filter(s => {
+        const matchesSearch = !searchTerm ||
+          s.name.toLowerCase().includes(searchTerm) ||
+          s.address.toLowerCase().includes(searchTerm);
+        const matchesCity = !cityFilter || s.city === cityFilter;
+        const matchesFormat = !formatFilter || s.format === formatFilter;
+        return matchesSearch && matchesCity && matchesFormat;
+      });
+
+      renderStores(filtered);
+    }
+
+    // =============================================
+    // MOBILE MENU TOGGLE
+    // =============================================
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('#mobileMenu a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
+    );
+
+    // =============================================
+    // INITIALIZE PAGE
+    // =============================================
+    renderStores(stores);
+  </script>
+</body>
+</html>
