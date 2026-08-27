@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================ -->
+  <!-- PAGE TITLE & META TAGS                        -->
+  <!-- ============================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sefalana - Botswana's Leading FMCG & Retail Wholesale Giant" />
+  <title>Sefalana · Home</title>
+
+  <!-- ============================================ -->
+  <!-- TAILWIND CSS (CDN)                           -->
+  <!-- ============================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ============================================ -->
+  <!-- CUSTOM STYLES                                -->
+  /* ============================================ */
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f8fafc;
+    }
+
+    /* ----- BRAND COLORS ----- */
+    .bg-sef-navy {
+      background: #0b1a2f;
+    }
+    .text-gold {
+      color: #fbbf24;
+    }
+
+    /* ----- BUTTON STYLES ----- */
+    .btn-primary {
+      background: #0b1a2f;
+      color: white;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #1a2f4a;
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: #fbbf24;
+      color: #0b1a2f;
+      transition: 0.2s;
+    }
+    .btn-gold:hover {
+      background: #f59e0b;
+      transform: translateY(-2px);
+    }
+
+    /* ----- HOVER EFFECTS ----- */
+    .hover-scale {
+      transition: all 0.2s ease;
+    }
+    .hover-scale:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ----- SAVINGS BADGE ANIMATION ----- */
+    .savings-badge {
+      background: linear-gradient(145deg, #fbbf24, #f59e0b);
+      animation: pulse-soft 2s infinite;
+    }
+    @keyframes pulse-soft {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.04);
+      }
+    }
+
+    /* ----- IMAGE HOVER ZOOM ----- */
+    .store-image-container {
+      overflow: hidden;
+    }
+    .store-image-container img {
+      transition: transform 0.4s ease;
+    }
+    .store-image-container:hover img {
+      transform: scale(1.06);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVIGATION BAR                               -->
+  /* ============================================ */
+  <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- ----- LOGO SECTION ----- -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
+            <span class="text-sef-navy font-extrabold text-xl">S</span>
+          </div>
+          <div>
+            <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
+            <span class="block text-[10px] uppercase tracking-[0.2em] text-gold font-medium">Shopper</span>
+          </div>
+        </div>
+
+        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
+          <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
+          <a href="store-locator.html" class="text-white/90 hover:text-gold transition">Store Locator</a>
+          <a href="b2b.html" class="text-white/90 hover:text-gold transition">B2B Supplier</a>
+          <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin</a>
+          <a href="cart.html" class="relative text-white/90 hover:text-gold transition">
+            <!-- Cart Icon -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <!-- Cart Badge -->
+            <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">3</span>
+          </a>
+        </div>
+
+        <!-- ----- MOBILE MENU BUTTON ----- -->
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
+      <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
+      <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
+      <a href="store-locator.html" class="block py-2 hover:text-gold transition">Store Locator</a>
+      <a href="b2b.html" class="block py-2 hover:text-gold transition">B2B Supplier</a>
+      <a href="admin.html" class="block py-2 text-gold font-semibold">Admin</a>
+      <a href="cart.html" class="block py-2 hover:text-gold transition">Cart</a>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- HERO SECTION                                 -->
+  /* ============================================ */
+  <section class="relative bg-sef-navy text-white overflow-hidden" style="background: linear-gradient(145deg, #0b1a2f 0%, #142b42 100%);">
+    <!-- Background Image -->
+    <div class="absolute inset-0 opacity-10 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop');"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
+      <h2 class="text-5xl md:text-7xl font-extrabold">Welcome to <span class="text-gold">Sefalana</span></h2>
+      <p class="text-xl md:text-2xl text-gray-300 mt-4">Botswana's Leading FMCG & Retail Wholesale Giant</p>
+      <p class="text-gray-400 max-w-2xl mx-auto mt-4">Since 1974 · quality products, unbeatable prices.</p>
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
+        <a href="specials.html" class="btn-gold px-10 py-4 rounded-xl font-bold shadow-2xl text-lg">View Specials</a>
+        <a href="store-locator.html" class="bg-white text-sef-navy px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition">Find a Store</a>
+      </div>
+    </div>
+
+    <!-- ----- STATS BAR ----- -->
+    <div class="relative bg-black/30 backdrop-blur-sm border-t border-white/10 py-6">
+      <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div><span class="text-4xl font-bold text-gold">50+</span><p class="text-xs text-gray-300">Years</p></div>
+        <div><span class="text-4xl font-bold text-gold">20+</span><p class="text-xs text-gray-300">Stores</p></div>
+        <div><span class="text-4xl font-bold text-gold">10k+</span><p class="text-xs text-gray-300">Products</p></div>
+        <div><span class="text-4xl font-bold text-gold">1M+</span><p class="text-xs text-gray-300">Customers</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SPECIALS PREVIEW SECTION                     -->
+  /* ============================================ */
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl font-bold text-sef-navy text-center">This Week's Specials</h2>
+    <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
+    <div id="specialsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+      <!-- Dynamically rendered by JavaScript -->
+    </div>
+    <div class="text-center mt-8">
+      <a href="specials.html" class="btn-primary px-8 py-3 rounded-lg font-semibold inline-block">View All Specials →</a>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- STORE LOCATOR PREVIEW SECTION                -->
+  /* ============================================ */
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-sef-navy text-center">Find a Store Near You</h2>
+      <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
+      <div id="storesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <!-- Dynamically rendered -->
+      </div>
+      <div class="text-center mt-8">
+        <a href="store-locator.html" class="btn-primary px-8 py-3 rounded-lg font-semibold inline-block">View All Stores →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  /* ============================================ */
+  <footer class="text-white py-8 bg-sef-navy border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
+      © 2026 Sefalana. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   */
+  /* ============================================ */
+  <script>
+    // =============================================
+    // DATA STORE
+    // =============================================
+    // Array of special offers
+    const specials = [{
+      id: 1,
+      comboName: 'Tiger Combo',
+      description: 'Tiger bread + 2L Coke + 1kg Sugar',
+      originalPrice: 89.99,
+      specialPrice: 65.00,
+      imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop',
+      savings: '27.78%'
+    }, {
+      id: 2,
+      comboName: 'Economy Combo',
+      description: '10kg Maize Meal + 2L Oil + 1kg Beans',
+      originalPrice: 249.99,
+      specialPrice: 199.99,
+      imageUrl: 'https://images.unsplash.com/photo-1506807803488-8eafc15316c5?q=80&w=400&auto=format&fit=crop',
+      savings: '20.00%'
+    }, {
+      id: 3,
+      comboName: 'Breakfast Pack',
+      description: '2kg Corn Flakes + 2L Milk + 500g Tea',
+      originalPrice: 159.99,
+      specialPrice: 129.99,
+      imageUrl: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=400&auto=format&fit=crop',
+      savings: '18.75%'
+    }];
+
+    // Array of store locations
+    const stores = [{
+      id: 1,
+      name: 'Sefalana Hyper Gaborone',
+      format: 'Hyper',
+      address: 'Plot 54376, Gaborone West',
+      city: 'Gaborone',
+      phone: '+267 391 4222',
+      image: 'https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=400&auto=format&fit=crop'
+    }, {
+      id: 2,
+      name: 'Sefalana Shopper Main Mall',
+      format: 'Shopper',
+      address: 'Main Mall, Gaborone',
+      city: 'Gaborone',
+      phone: '+267 397 2153',
+      image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=400&auto=format&fit=crop'
+    }, {
+      id: 3,
+      name: 'Sefalana Cash & Carry Francistown',
+      format: 'Cash & Carry',
+      address: 'Plot 2145, Light Industrial',
+      city: 'Francistown',
+      phone: '+267 241 2278',
+      image: 'https://images.unsplash.com/photo-1583258292688-d02187dcbea8?q=80&w=400&auto=format&fit=crop'
+    }];
+
+    // =============================================
+    // RENDER FUNCTIONS
+    // =============================================
+
+    // Function to display specials on the page
+    function renderSpecials(list) {
+      const grid = document.getElementById('specialsGrid');
+      grid.innerHTML = list.map(sp => `
+          <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="store-image-container h-48">
+              <img src="${sp.imageUrl}" alt="${sp.comboName}" class="w-full h-full object-cover">
+            </div>
+            <div class="p-5">
+              <h3 class="text-xl font-bold text-sef-navy">${sp.comboName}</h3>
+              <p class="text-gray-600 text-sm">${sp.description}</p>
+              <div class="flex items-center justify-between mt-3">
+                <span class="text-2xl font-bold text-sef-navy">P${sp.specialPrice.toFixed(2)}</span>
+                <span class="text-gray-400 line-through">P${sp.originalPrice.toFixed(2)}</span>
+                <span class="savings-badge text-sef-navy text-sm font-semibold px-3 py-1 rounded-full">Save ${sp.savings}</span>
+              </div>
+              <button onclick="alert('${sp.comboName} added to cart')" class="mt-3 w-full btn-primary py-2 rounded-lg font-medium">Add to Cart</button>
+            </div>
+          </div>
+        `).join('');
+    }
+
+    // Function to display stores on the page
+    function renderStores(list) {
+      const grid = document.getElementById('storesGrid');
+      grid.innerHTML = list.map(s => `
+          <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+            <div class="store-image-container h-48">
+              <img src="${s.image}" alt="${s.name}" class="w-full h-full object-cover">
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-sef-navy">${s.name}</h3>
+              <span class="inline-block bg-sef-navy text-white text-xs px-3 py-1 rounded-full">${s.format}</span>
+              <p class="text-sm text-gray-600 mt-2">${s.address}, ${s.city}</p>
+              <p class="text-sm">📞 ${s.phone}</p>
+            </div>
+          </div>
+        `).join('');
+    }
+
+    // =============================================
+    // MOBILE MENU TOGGLE
+    // =============================================
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('#mobileMenu a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
+    );
+
+    // =============================================
+    // INITIALIZE PAGE
+    // =============================================
+    renderSpecials(specials);
+    renderStores(stores);
+  </script>
+</body>
+</html>
