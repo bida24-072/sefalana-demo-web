@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ============================================ -->
-  <!-- PAGE TITLE & META TAGS                        -->
-  <!-- ============================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sefalana · Admin Portal</title>
 
-  <!-- ============================================ -->
-  <!-- TAILWIND CSS (CDN)                           -->
-  <!-- ============================================ -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- ============================================ -->
-  <!-- CUSTOM STYLES                                -->
-  /* ============================================ */
   <style>
-    /* ----- RESET & BASE ----- */
     * {
       margin: 0;
       padding: 0;
@@ -29,7 +19,6 @@
       background: #f8fafc;
     }
 
-    /* ----- BRAND COLORS ----- */
     .bg-sef-navy {
       background: #0b1a2f;
     }
@@ -37,7 +26,6 @@
       color: #fbbf24;
     }
 
-    /* ----- BUTTON STYLES ----- */
     .btn-primary {
       background: #0b1a2f;
       color: white;
@@ -58,7 +46,6 @@
       transform: translateY(-2px);
     }
 
-    /* ----- FORM INPUT FOCUS ----- */
     .form-input:focus {
       outline: none;
       border-color: #0b1a2f;
@@ -66,16 +53,12 @@
     }
   </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 
-  <!-- ============================================ -->
-  <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
-  /* ============================================ */
   <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
 
-        <!-- ----- LOGO SECTION ----- -->
         <div class="flex items-center gap-3">
           <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
             <span class="text-sef-navy font-extrabold text-xl">S</span>
@@ -86,7 +69,6 @@
           </div>
         </div>
 
-        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
         <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
           <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
           <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
@@ -101,7 +83,6 @@
           </a>
         </div>
 
-        <!-- ----- MOBILE MENU BUTTON ----- -->
         <div class="md:hidden">
           <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
             <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,7 +93,6 @@
       </div>
     </div>
 
-    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
       <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
       <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
@@ -123,98 +103,79 @@
     </div>
   </nav>
 
-  <!-- ============================================ -->
-  <!-- ADMIN PORTAL                                 */
-  /* ============================================ -->
-  <section class="py-16 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 class="text-4xl md:text-5xl font-bold text-sef-navy">Admin Portal</h1>
-    <div class="w-24 h-1 bg-gold my-4 rounded"></div>
-    <p class="text-gray-600 text-lg mb-8">Secure access for Sefalana staff to manage stores, specials, and supplier inquiries.</p>
+  <main class="flex-grow">
+    <section class="py-16 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl md:text-5xl font-bold text-sef-navy">Admin Portal</h1>
+      <div class="w-24 h-1 bg-gold my-4 rounded"></div>
+      <p class="text-gray-600 text-lg mb-8">Secure access for Sefalana staff to manage stores, specials, and supplier inquiries.</p>
 
-    <div class="bg-white rounded-xl shadow-2xl border border-gray-200 p-8">
+      <div class="bg-white rounded-xl shadow-2xl border border-gray-200 p-8">
 
-      <!-- ===== LOGIN FORM ===== -->
-      <div id="adminLoginForm">
-        <!-- Error Message (hidden by default) -->
-        <div id="adminError" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4"></div>
+        <div id="adminLoginForm">
+          <div id="adminError" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4"></div>
 
-        <form onsubmit="adminLogin(event)" class="space-y-6">
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
-            <input type="email" id="adminEmail" required placeholder="admin@sefalana.co.bw" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
-            <input type="password" id="adminPassword" required minlength="6" placeholder="••••••••" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
-          </div>
-          <button type="submit" class="btn-primary w-full py-3 rounded-lg font-bold shadow-lg">Sign In</button>
-        </form>
-      </div>
-
-      <!-- ===== ADMIN DASHBOARD (hidden until login) ===== -->
-      <div id="adminDashboard" class="hidden">
-        <!-- Dashboard Header -->
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-2xl font-bold text-sef-navy">Dashboard</h3>
-          <button onclick="adminLogout()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md">Logout</button>
+          <form onsubmit="adminLogin(event)" class="space-y-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+              <input type="email" id="adminEmail" required placeholder="admin@sefalana.co.bw" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+              <input type="password" id="adminPassword" required minlength="6" placeholder="••••••••" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+            </div>
+            <button type="submit" class="btn-primary w-full py-3 rounded-lg font-bold shadow-lg">Sign In</button>
+          </form>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-2 gap-4 mb-8">
-          <div class="bg-blue-50 p-4 rounded-lg text-center shadow-md">
-            <span class="text-3xl font-bold text-sef-navy" id="totalStores">0</span>
-            <p class="text-gray-600 text-sm">Total Stores</p>
+        <div id="adminDashboard" class="hidden">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-sef-navy">Dashboard</h3>
+            <button onclick="adminLogout()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md">Logout</button>
           </div>
-          <div class="bg-yellow-50 p-4 rounded-lg text-center shadow-md">
-            <span class="text-3xl font-bold text-sef-navy" id="activeSpecials">0</span>
-            <p class="text-gray-600 text-sm">Active Specials</p>
-          </div>
-          <div class="bg-green-50 p-4 rounded-lg text-center shadow-md">
-            <span class="text-3xl font-bold text-sef-navy" id="pendingInquiries">0</span>
-            <p class="text-gray-600 text-sm">Pending Inquiries</p>
-          </div>
-          <div class="bg-purple-50 p-4 rounded-lg text-center shadow-md">
-            <span class="text-3xl font-bold text-sef-navy">P2.5M</span>
-            <p class="text-gray-600 text-sm">Monthly Revenue</p>
-          </div>
-        </div>
 
-        <!-- Recent Inquiries -->
-        <div>
-          <h4 class="font-bold text-sef-navy mb-3">Recent Supplier Inquiries</h4>
-          <div id="adminInquiries" class="space-y-3">
-            <!-- Rendered by JavaScript -->
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="bg-blue-50 p-4 rounded-lg text-center shadow-md">
+              <span class="text-3xl font-bold text-sef-navy" id="totalStores">0</span>
+              <p class="text-gray-600 text-sm">Total Stores</p>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded-lg text-center shadow-md">
+              <span class="text-3xl font-bold text-sef-navy" id="activeSpecials">0</span>
+              <p class="text-gray-600 text-sm">Active Specials</p>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg text-center shadow-md">
+              <span class="text-3xl font-bold text-sef-navy" id="pendingInquiries">0</span>
+              <p class="text-gray-600 text-sm">Pending Inquiries</p>
+            </div>
+            <div class="bg-purple-50 p-4 rounded-lg text-center shadow-md">
+              <span class="text-3xl font-bold text-sef-navy">P2.5M</span>
+              <p class="text-gray-600 text-sm">Monthly Revenue</p>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-bold text-sef-navy mb-3">Recent Supplier Inquiries</h4>
+            <div id="adminInquiries" class="space-y-3">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- ============================================ -->
-  <!-- FOOTER                                       */
-  /* ============================================ -->
+  <!-- Footer pushed to bottom -->
   <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
     <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
   </footer>
 
-  <!-- ============================================ -->
-  <!-- JAVASCRIPT                                   */
-  /* ============================================ -->
   <script>
-    // =============================================
-    // DATA STORE (Simulated Database)
-    // =============================================
-
-    // Admin user credentials (in a real app, this would be on a server)
     const adminUsers = [{
       id: 1,
       email: 'admin@sefalana.co.bw',
-      passwordHash: 'hashed_12345', // In real app, use proper hashing
+      passwordHash: 'hashed_12345',
       fullName: 'System Administrator',
       role: 'admin'
     }];
 
-    // Sample data for dashboard stats
     const stats = {
       stores: 8,
       specials: 6,
@@ -224,66 +185,39 @@
       ]
     };
 
-    // =============================================
-    // SECURITY UTILITIES
-    // =============================================
-
-    // Simple password hashing (for demo purposes only)
     function hashPassword(password) {
       let hash = 0;
       for (let i = 0; i < password.length; i++) {
         hash = ((hash << 5) - hash) + password.charCodeAt(i);
-        hash = hash & hash; // Convert to 32-bit integer
+        hash = hash & hash;
       }
       return 'hashed_' + hash;
     }
 
-    // =============================================
-    // ADMIN LOGIN FUNCTION
-    // =============================================
-
     function adminLogin(event) {
-      // Prevent form from reloading the page
       event.preventDefault();
-
-      // Get form values
       const email = document.getElementById('adminEmail').value.trim();
       const password = document.getElementById('adminPassword').value;
-
-      // Find user by email
       const user = adminUsers.find(u => u.email === email);
 
-      // Check if user exists and password matches
       if (!user || hashPassword(password) !== user.passwordHash) {
-        // Show error message
         const errorDiv = document.getElementById('adminError');
         errorDiv.textContent = 'Invalid email or password. Please try again.';
         errorDiv.classList.remove('hidden');
         return false;
       }
 
-      // ----- LOGIN SUCCESS -----
-      // Hide error message
       document.getElementById('adminError').classList.add('hidden');
-
-      // Hide login form, show dashboard
       document.getElementById('adminLoginForm').classList.add('hidden');
       document.getElementById('adminDashboard').classList.remove('hidden');
 
-      // Update dashboard stats
       document.getElementById('totalStores').textContent = stats.stores;
       document.getElementById('activeSpecials').textContent = stats.specials;
       document.getElementById('pendingInquiries').textContent = stats.inquiries.filter(i => i.status === 'pending').length;
 
-      // Render inquiries
       renderInquiries();
-
       return false;
     }
-
-    // =============================================
-    // RENDER INQUIRIES
-    // =============================================
 
     function renderInquiries() {
       const container = document.getElementById('adminInquiries');
@@ -313,10 +247,6 @@
         `).join('');
     }
 
-    // =============================================
-    // UPDATE INQUIRY STATUS
-    // =============================================
-
     function updateInquiry(id, newStatus) {
       const inquiry = stats.inquiries.find(i => i.id === id);
       if (inquiry) {
@@ -326,22 +256,11 @@
       }
     }
 
-    // =============================================
-    // ADMIN LOGOUT
-    // =============================================
-
     function adminLogout() {
-      // Hide dashboard, show login form
       document.getElementById('adminDashboard').classList.add('hidden');
       document.getElementById('adminLoginForm').classList.remove('hidden');
-
-      // Clear password field
       document.getElementById('adminPassword').value = '';
     }
-
-    // =============================================
-    // MOBILE MENU TOGGLE
-    // =============================================
 
     function toggleMobileMenu() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
