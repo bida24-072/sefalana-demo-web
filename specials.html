@@ -6,6 +6,7 @@
   <!-- ============================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sefalana Weekly Specials - Best grocery deals in Botswana" />
   <title>Sefalana · Weekly Specials</title>
 
   <!-- ============================================ -->
@@ -15,7 +16,7 @@
 
   <!-- ============================================ -->
   <!-- CUSTOM STYLES                                -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <style>
     /* ----- RESET & BASE ----- */
     * {
@@ -35,6 +36,9 @@
     }
     .text-gold {
       color: #fbbf24;
+    }
+    .border-gold {
+      border-color: #fbbf24;
     }
 
     /* ----- BUTTON STYLES ----- */
@@ -85,6 +89,7 @@
     /* ----- IMAGE HOVER ZOOM ----- */
     .store-image-container {
       overflow: hidden;
+      position: relative;
     }
     .store-image-container img {
       transition: transform 0.4s ease;
@@ -92,21 +97,55 @@
     .store-image-container:hover img {
       transform: scale(1.06);
     }
+
+    /* ----- FILTER BUTTON ACTIVE STATE ----- */
+    .filter-active {
+      background: #0b1a2f !important;
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(11, 26, 47, 0.3);
+    }
+
+    /* ----- CATEGORY BADGE ----- */
+    .category-badge {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(11, 26, 47, 0.85);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ----- STOCK INDICATOR ----- */
+    .in-stock {
+      color: #22c55e;
+    }
+    .low-stock {
+      color: #eab308;
+    }
   </style>
 </head>
 <body>
 
   <!-- ============================================ -->
   <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
 
-        <!-- ----- LOGO SECTION ----- -->
+        <!-- ----- LOGO SECTION (with Sefalana Shopper logo) ----- -->
         <div class="flex items-center gap-3">
-          <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
-            <span class="text-sef-navy font-extrabold text-xl">S</span>
+          <div class="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md overflow-hidden">
+            <!-- Sefalana "S" Logo -->
+            <svg viewBox="0 0 100 100" class="w-10 h-10">
+              <circle cx="50" cy="50" r="48" fill="#0b1a2f" stroke="#fbbf24" stroke-width="2"/>
+              <text x="50" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#fbbf24">S</text>
+            </svg>
           </div>
           <div>
             <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
@@ -117,14 +156,16 @@
         <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
         <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
           <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
-          <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
+          <a href="specials.html" class="text-gold hover:text-gold transition font-semibold">Specials</a>
           <a href="store-locator.html" class="text-white/90 hover:text-gold transition">Store Locator</a>
           <a href="b2b.html" class="text-white/90 hover:text-gold transition">B2B Supplier</a>
           <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin</a>
           <a href="cart.html" class="relative text-white/90 hover:text-gold transition">
+            <!-- Cart Icon -->
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
+            <!-- Cart Badge -->
             <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">3</span>
           </a>
         </div>
@@ -143,7 +184,7 @@
     <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
       <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
-      <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
+      <a href="specials.html" class="block py-2 text-gold font-semibold transition">Specials</a>
       <a href="store-locator.html" class="block py-2 hover:text-gold transition">Store Locator</a>
       <a href="b2b.html" class="block py-2 hover:text-gold transition">B2B Supplier</a>
       <a href="admin.html" class="block py-2 text-gold font-semibold">Admin</a>
@@ -153,162 +194,399 @@
 
   <!-- ============================================ -->
   <!-- PAGE HEADER                                  -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 class="text-4xl md:text-5xl font-bold text-sef-navy">Weekly Specials</h1>
-    <div class="w-24 h-1 bg-gold my-4 rounded"></div>
-    <p class="text-gray-600 max-w-2xl text-lg">Unbeatable deals at all Sefalana stores. Limited time.</p>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold text-sef-navy">Weekly Specials</h1>
+        <div class="w-24 h-1 bg-gold my-3 rounded"></div>
+        <p class="text-gray-600 max-w-2xl text-lg">Unbeatable grocery deals at all Sefalana stores. Limited time!</p>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <span class="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          12 Specials Available
+        </span>
+      </div>
+    </div>
 
     <!-- ===== FILTER BUTTONS ===== -->
-    <div class="flex flex-wrap gap-3 mt-6">
-      <button onclick="filterSpecials('all')" class="px-6 py-2 rounded-full font-medium bg-sef-navy text-white shadow">All</button>
-      <button onclick="filterSpecials('featured')" class="px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md">Featured</button>
-      <button onclick="filterSpecials('food')" class="px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md">Food</button>
-      <button onclick="filterSpecials('household')" class="px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md">Household</button>
+    <div class="flex flex-wrap gap-3 mt-8">
+      <button onclick="filterSpecials('all')" class="filter-btn px-6 py-2.5 rounded-full font-medium bg-sef-navy text-white shadow-lg transition-all hover:shadow-xl" data-filter="all">
+        🛒 All Specials
+      </button>
+      <button onclick="filterSpecials('featured')" class="filter-btn px-6 py-2.5 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md transition-all" data-filter="featured">
+        ⭐ Featured
+      </button>
+      <button onclick="filterSpecials('food')" class="filter-btn px-6 py-2.5 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md transition-all" data-filter="food">
+        🍞 Food & Groceries
+      </button>
+      <button onclick="filterSpecials('beverages')" class="filter-btn px-6 py-2.5 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md transition-all" data-filter="beverages">
+        🥤 Beverages
+      </button>
+      <button onclick="filterSpecials('household')" class="filter-btn px-6 py-2.5 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md transition-all" data-filter="household">
+        🧹 Household
+      </button>
+      <button onclick="filterSpecials('meat')" class="filter-btn px-6 py-2.5 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md transition-all" data-filter="meat">
+        🥩 Meat & Poultry
+      </button>
     </div>
 
     <!-- ===== SPECIALS GRID ===== -->
-    <div id="specialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+    <div id="specialsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
       <!-- Rendered by JavaScript -->
     </div>
   </section>
 
   <!-- ============================================ -->
   <!-- FOOTER                                       -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
-    <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
+    <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
+      © 2026 Sefalana Group. All rights reserved. | Botswana's Leading Retail Giant
+    </div>
   </footer>
 
   <!-- ============================================ -->
-  <!-- JAVASCRIPT                                   */
-  /* ============================================ */
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
   <script>
     // =============================================
-    // DATA STORE
+    // DATA STORE - Full list with more grocery items
     // =============================================
-    // Full list of specials with categories
+
     const allSpecials = [{
+      // 1. Food - Grains
       id: 1,
-      comboName: 'Tiger Combo',
-      description: 'Tiger bread + 2L Coke + 1kg Sugar',
+      comboName: 'Family Meal Combo',
+      description: '10kg Maize Meal + 5kg Rice + 2kg Sugar Beans',
+      originalPrice: 289.99,
+      specialPrice: 229.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop',
+      isFeatured: true,
+      savings: '20.69%',
+      stock: 'In Stock'
+    }, {
+      // 2. Food - Bread & Bakery
+      id: 2,
+      comboName: 'Bakery Breakfast Pack',
+      description: 'Tiger Bread + 6 Croissants + 500g Butter',
       originalPrice: 89.99,
       specialPrice: 65.00,
       category: 'food',
       imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop',
       isFeatured: true,
-      savings: '27.78%'
+      savings: '27.78%',
+      stock: 'In Stock'
     }, {
-      id: 2,
-      comboName: 'Economy Combo',
-      description: '10kg Maize Meal + 2L Oil + 1kg Beans',
-      originalPrice: 249.99,
-      specialPrice: 199.99,
-      category: 'food',
-      imageUrl: 'https://images.unsplash.com/photo-1506807803488-8eafc15316c5?q=80&w=400&auto=format&fit=crop',
-      isFeatured: true,
-      savings: '20.00%'
-    }, {
+      // 3. Food - Breakfast Cereals
       id: 3,
-      comboName: 'Breakfast Pack',
-      description: '2kg Corn Flakes + 2L Milk + 500g Tea',
+      comboName: 'Breakfast Cereal Bundle',
+      description: '2kg Corn Flakes + 2L Long Life Milk + 500g Tea',
       originalPrice: 159.99,
       specialPrice: 129.99,
       category: 'food',
       imageUrl: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=400&auto=format&fit=crop',
       isFeatured: true,
-      savings: '18.75%'
+      savings: '18.75%',
+      stock: 'In Stock'
     }, {
+      // 4. Food - Cooking Essentials
       id: 4,
-      comboName: 'Braai Day Special',
-      description: '2kg Mixed Meat + 2L Cold Drink + 500g Salad',
-      originalPrice: 189.99,
+      comboName: 'Cooking Essentials Pack',
+      description: '3L Cooking Oil + 2kg Salt + 500g Spices',
+      originalPrice: 119.99,
+      specialPrice: 89.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1593629849559-69f709367bf0?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '25.00%',
+      stock: 'In Stock'
+    }, {
+      // 5. Food - Pasta & Rice
+      id: 5,
+      comboName: 'Pasta & Rice Bundle',
+      description: '2kg Spaghetti + 2kg Macaroni + 5kg Rice',
+      originalPrice: 149.99,
+      specialPrice: 119.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1546549032-9571cd6b27df?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '20.00%',
+      stock: 'Low Stock'
+    }, {
+      // 6. Food - Canned Goods
+      id: 6,
+      comboName: 'Canned Food Pack',
+      description: '12 Cans Baked Beans + 6 Cans Tuna + 6 Cans Tomatoes',
+      originalPrice: 199.99,
+      specialPrice: 159.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1557844352-761f2565b576?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '20.00%',
+      stock: 'In Stock'
+    }, {
+      // 7. Food - Vegetables
+      id: 7,
+      comboName: 'Fresh Veggie Box',
+      description: '5kg Potatoes + 3kg Onions + 2kg Tomatoes + 1kg Carrots',
+      originalPrice: 179.99,
       specialPrice: 149.99,
       category: 'food',
-      imageUrl: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=400&auto=format&fit=crop',
-      isFeatured: false,
-      savings: '21.06%'
+      imageUrl: 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?q=80&w=400&auto=format&fit=crop',
+      isFeatured: true,
+      savings: '16.67%',
+      stock: 'In Stock'
     }, {
-      id: 5,
+      // 8. Food - Fruits
+      id: 8,
+      comboName: 'Fruit Basket Special',
+      description: '3kg Apples + 2kg Oranges + 2kg Bananas + 1kg Grapes',
+      originalPrice: 159.99,
+      specialPrice: 129.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '18.75%',
+      stock: 'In Stock'
+    }, {
+      // 9. Beverages
+      id: 9,
+      comboName: 'Beverage Party Pack',
+      description: '12 Cans Cold Drink + 2L Juice + 6L Water',
+      originalPrice: 139.99,
+      specialPrice: 109.99,
+      category: 'beverages',
+      imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '21.43%',
+      stock: 'In Stock'
+    }, {
+      // 10. Beverages - Hot Drinks
+      id: 10,
+      comboName: 'Hot Drinks Bundle',
+      description: '1kg Coffee + 1kg Tea + 500g Hot Chocolate',
+      originalPrice: 169.99,
+      specialPrice: 139.99,
+      category: 'beverages',
+      imageUrl: 'https://images.unsplash.com/photo-1554107136-067e4a4af3f8?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '17.65%',
+      stock: 'In Stock'
+    }, {
+      // 11. Meat & Poultry
+      id: 11,
+      comboName: 'Braai Day Special',
+      description: '2kg Mixed Meat (Beef/Chicken) + 2L Cold Drink + 500g Salad',
+      originalPrice: 189.99,
+      specialPrice: 149.99,
+      category: 'meat',
+      imageUrl: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=400&auto=format&fit=crop',
+      isFeatured: true,
+      savings: '21.06%',
+      stock: 'Low Stock'
+    }, {
+      // 12. Meat - Processed Meats
+      id: 12,
+      comboName: 'Sausage & Bacon Pack',
+      description: '2kg Sausages + 1kg Bacon + 1kg Polony',
+      originalPrice: 229.99,
+      specialPrice: 189.99,
+      category: 'meat',
+      imageUrl: 'https://images.unsplash.com/photo-1589908018895-3db80d7aff4c?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '17.39%',
+      stock: 'In Stock'
+    }, {
+      // 13. Household
+      id: 13,
       comboName: 'Cleaning Essentials',
-      description: '5L Bleach + 2L Dishwash + 500g Powder',
+      description: '5L Bleach + 2L Dishwashing Liquid + 500g Powder',
       originalPrice: 129.99,
       specialPrice: 99.99,
       category: 'household',
       imageUrl: 'https://images.unsplash.com/photo-1585421514738-01798e348b17?q=80&w=400&auto=format&fit=crop',
       isFeatured: false,
-      savings: '23.08%'
+      savings: '23.08%',
+      stock: 'In Stock'
     }, {
-      id: 6,
-      comboName: 'Student Survival Pack',
-      description: '5kg Rice + 1L Oil + 500g Salt',
-      originalPrice: 119.99,
-      specialPrice: 89.99,
+      // 14. Household - Laundry
+      id: 14,
+      comboName: 'Laundry Bundle',
+      description: '5kg Washing Powder + 2L Fabric Softener + 50 Bleach Tablets',
+      originalPrice: 189.99,
+      specialPrice: 149.99,
+      category: 'household',
+      imageUrl: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '21.05%',
+      stock: 'In Stock'
+    }, {
+      // 15. Food - Baby Essentials
+      id: 15,
+      comboName: 'Baby Care Pack',
+      description: '2kg Baby Formula + 50 Diapers + 100 Wipes',
+      originalPrice: 349.99,
+      specialPrice: 299.99,
       category: 'food',
-      imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop',
-      isFeatured: true,
-      savings: '25.00%'
+      imageUrl: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '14.29%',
+      stock: 'In Stock'
+    }, {
+      // 16. Food - Snacks
+      id: 16,
+      comboName: 'Snack Attack Pack',
+      description: '10 Chips + 10 Chocolates + 10 Biscuits',
+      originalPrice: 249.99,
+      specialPrice: 199.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '20.00%',
+      stock: 'In Stock'
     }];
 
     // =============================================
     // RENDER FUNCTION
     // =============================================
 
-    // Function to display specials on the page
     function renderSpecials(list) {
       const grid = document.getElementById('specialsGrid');
 
-      // Check if there are any specials to display
       if (!list.length) {
-        grid.innerHTML = '<div class="col-span-full text-center text-gray-500">No specials found.</div>';
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-16">
+            <p class="text-gray-500 text-lg">No specials found.</p>
+            <button onclick="filterSpecials('all')" class="btn-primary mt-4 px-6 py-2 rounded-lg">View All Specials</button>
+          </div>
+        `;
         return;
       }
 
-      // Generate HTML for each special
-      grid.innerHTML = list.map(sp => `
-          <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden">
-            <div class="store-image-container h-48 relative">
-              <img src="${sp.imageUrl}" alt="${sp.comboName}" class="w-full h-full object-cover" loading="lazy">
-              ${sp.isFeatured ? '<span class="absolute top-2 right-2 bg-gold text-sef-navy text-xs font-bold px-2 py-1 rounded-full shadow">⭐ FEATURED</span>' : ''}
+      grid.innerHTML = list.map(sp => {
+        // Determine stock indicator
+        const stockClass = sp.stock === 'In Stock' ? 'in-stock' : 'low-stock';
+        const stockIcon = sp.stock === 'In Stock' ? '✅' : '⚠️';
+
+        // Category emoji mapping
+        const categoryEmojis = {
+          'food': '🍞',
+          'beverages': '🥤',
+          'household': '🧹',
+          'meat': '🥩'
+        };
+        const categoryEmoji = categoryEmojis[sp.category] || '🛒';
+
+        return `
+          <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transition-all duration-300">
+            <div class="store-image-container h-52 relative">
+              <img src="${sp.imageUrl}" alt="${sp.comboName}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400&auto=format&fit=crop'">
+              ${sp.isFeatured ? '<span class="absolute top-3 right-3 bg-gold text-sef-navy text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">⭐ FEATURED</span>' : ''}
+              <span class="category-badge">${categoryEmoji} ${sp.category.charAt(0).toUpperCase() + sp.category.slice(1)}</span>
             </div>
             <div class="p-5">
-              <h3 class="text-xl font-bold text-sef-navy">${sp.comboName}</h3>
+              <h3 class="text-lg font-bold text-sef-navy mb-1">${sp.comboName}</h3>
               <p class="text-gray-600 text-sm">${sp.description}</p>
               <div class="flex items-center justify-between mt-3">
-                <span class="text-2xl font-bold text-sef-navy">P${sp.specialPrice.toFixed(2)}</span>
-                <span class="text-gray-400 line-through">P${sp.originalPrice.toFixed(2)}</span>
-                <span class="savings-badge text-sef-navy text-sm font-semibold px-3 py-1 rounded-full">Save ${sp.savings}</span>
+                <div>
+                  <span class="text-2xl font-bold text-sef-navy">P${sp.specialPrice.toFixed(2)}</span>
+                  <span class="text-gray-400 line-through ml-2 text-sm">P${sp.originalPrice.toFixed(2)}</span>
+                </div>
+                <span class="savings-badge text-sef-navy text-sm font-bold px-3 py-1.5 rounded-full shadow">Save ${sp.savings}</span>
               </div>
-              <button onclick="alert('${sp.comboName} added to cart')" class="mt-3 w-full btn-primary py-2 rounded-lg font-medium">Add to Cart</button>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+                <span class="text-xs font-medium ${stockClass}">${stockIcon} ${sp.stock}</span>
+                <button onclick="addToCart('${sp.comboName}', ${sp.specialPrice})" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium transition">
+                  🛒 Add to Cart
+                </button>
+              </div>
             </div>
           </div>
-        `).join('');
+        `;
+      }).join('');
     }
 
     // =============================================
     // FILTER FUNCTION
     // =============================================
 
-    // Function to filter specials by category
     function filterSpecials(filter) {
+      // Update button styles
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-sef-navy', 'text-white', 'filter-active');
+        btn.classList.add('bg-white', 'text-sef-navy');
+        if (btn.dataset.filter === filter) {
+          btn.classList.remove('bg-white', 'text-sef-navy');
+          btn.classList.add('bg-sef-navy', 'text-white', 'filter-active');
+        }
+      });
+
       let list = allSpecials;
 
-      // Apply filter based on the button clicked
-      if (filter === 'featured') {
-        list = allSpecials.filter(s => s.isFeatured);
-      } else if (filter === 'food') {
-        list = allSpecials.filter(s => s.category === 'food');
-      } else if (filter === 'household') {
-        list = allSpecials.filter(s => s.category === 'household');
+      switch (filter) {
+        case 'featured':
+          list = allSpecials.filter(s => s.isFeatured);
+          break;
+        case 'food':
+          list = allSpecials.filter(s => s.category === 'food');
+          break;
+        case 'beverages':
+          list = allSpecials.filter(s => s.category === 'beverages');
+          break;
+        case 'household':
+          list = allSpecials.filter(s => s.category === 'household');
+          break;
+        case 'meat':
+          list = allSpecials.filter(s => s.category === 'meat');
+          break;
+        default:
+          list = allSpecials;
       }
-      // 'all' shows everything
 
       renderSpecials(list);
     }
 
     // =============================================
+    // ADD TO CART FUNCTION
+    // =============================================
+
+    function addToCart(name, price) {
+      // Show a nice notification instead of basic alert
+      const notification = document.createElement('div');
+      notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-2xl z-50 transform transition-all duration-500 translate-y-0 opacity-100';
+      notification.innerHTML = `
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🛒</span>
+          <div>
+            <p class="font-semibold">${name}</p>
+            <p class="text-sm opacity-90">Added to cart • P${price.toFixed(2)}</p>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(notification);
+
+      // Remove notification after 3 seconds
+      setTimeout(() => {
+        notification.style.transform = 'translateY(100px)';
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 500);
+      }, 3000);
+
+      // Update cart badge (demo)
+      const badge = document.querySelector('.absolute.-top-1.-right-2');
+      if (badge) {
+        const current = parseInt(badge.textContent) || 0;
+        badge.textContent = current + 1;
+      }
+    }
+
+    // =============================================
     // MOBILE MENU TOGGLE
     // =============================================
+
     function toggleMobileMenu() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     }
@@ -319,8 +597,13 @@
     );
 
     // =============================================
-    // INITIALIZE PAGE
+    // INITIALIZE PAGE - Show "All" by default
     // =============================================
+
+    // Set "All" as active
+    document.querySelector('.filter-btn[data-filter="all"]').classList.add('bg-sef-navy', 'text-white', 'filter-active');
+    document.querySelector('.filter-btn[data-filter="all"]').classList.remove('bg-white', 'text-sef-navy');
+
     renderSpecials(allSpecials);
   </script>
 </body>
