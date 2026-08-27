@@ -1,1335 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sefalana - Botswana's Leading FMCG & Retail Wholesale Giant. Find stores, view weekly specials, and partner with us.">
-    <meta name="keywords" content="Sefalana, Botswana, FMCG, Retail, Wholesale, Grocery, Specials">
-    <meta name="author" content="Sefalana Group">
-    
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' https://cdn.tailwindcss.com;">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    
-    <title>Sefalana - Botswana's Leading FMCG & Retail Wholesale Giant</title>
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Custom Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'sef-navy': '#0A192F',
-                        'sef-gold': '#FFD700',
-                        'sef-deepblue': '#1B2A4A',
-                        'sef-lightblue': '#2C3E50',
-                        'sef-gray': '#F3F4F6',
-                    },
-                    fontFamily: {
-                        'sans': ['Segoe UI', 'Arial', 'Helvetica', 'sans-serif'],
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.5s ease-in',
-                        'slide-down': 'slideDown 0.3s ease',
-                        'pulse-soft': 'pulseSoft 2s infinite',
-                        'spin-slow': 'spin 1s linear infinite',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        slideDown: {
-                            '0%': { transform: 'translateY(-50px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        pulseSoft: {
-                            '0%, 100%': { transform: 'scale(1)' },
-                            '50%': { transform: 'scale(1.05)' },
-                        },
-                    },
-                }
-            }
-        }
-    </script>
-    
-    <!-- Custom Styles -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
-            scroll-behavior: smooth;
-            line-height: 1.6;
-        }
-        
-        /* Smooth transitions */
-        .transition-all {
-            transition: all 0.3s ease;
-        }
-        
-        /* Hover effects */
-        .hover-scale {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .hover-scale:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        /* Savings badge animation */
-        .savings-badge {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            animation: pulseSoft 2s infinite;
-        }
-        
-        /* Loading spinner */
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #0A192F;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Gradient text */
-        .gradient-text {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Card hover effect */
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #0A192F;
-            border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #1B2A4A;
-        }
-        
-        /* Form input focus */
-        .form-input:focus {
-            outline: none;
-            border-color: #0A192F;
-            box-shadow: 0 0 0 3px rgba(10, 25, 47, 0.1);
-        }
-        
-        /* Button styles */
-        .btn-primary {
-            background-color: #0A192F;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background-color: #1B2A4A;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(10, 25, 47, 0.3);
-        }
-        
-        .btn-gold {
-            background-color: #FFD700;
-            color: #0A192F;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-gold:hover {
-            background-color: #FFA500;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-        
-        /* Navigation active state */
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #FFD700;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        /* Mobile menu animation */
-        #mobileMenu {
-            animation: slideDown 0.3s ease;
-        }
-        
-        /* Image hover effect */
-        .image-hover {
-            transition: transform 0.5s ease;
-        }
-        
-        .image-hover:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Store image container */
-        .store-image-container {
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .store-image-container img {
-            transition: transform 0.5s ease;
-        }
-        
-        .store-image-container:hover img {
-            transform: scale(1.1);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sefalana - Botswana's Leading FMCG & Retail Wholesale Giant. Find stores, view weekly specials, and partner with us.">
+  <title>Sefalana · Botswana’s Retail Giant</title>
+  <!-- Tailwind + custom styles (lightweight) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* base reset & custom overrides */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Roboto, system-ui, sans-serif; scroll-behavior: smooth; background: #f8fafc; }
+    .gradient-gold { background: linear-gradient(145deg, #fbbf24, #f59e0b); }
+    .bg-sef-navy { background: #0b1a2f; }
+    .text-gold { color: #fbbf24; }
+    .border-gold { border-color: #fbbf24; }
+    .hover-scale { transition: all 0.2s ease; }
+    .hover-scale:hover { transform: translateY(-4px); box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15); }
+    .nav-link::after { content: ''; display: block; width: 0; height: 2px; background: #fbbf24; transition: 0.3s; }
+    .nav-link:hover::after { width: 100%; }
+    .btn-primary { background: #0b1a2f; color: white; transition: 0.2s; }
+    .btn-primary:hover { background: #1a2f4a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,26,47,0.2); }
+    .btn-gold { background: #fbbf24; color: #0b1a2f; transition: 0.2s; }
+    .btn-gold:hover { background: #f59e0b; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(251,191,36,0.3); }
+    .savings-badge { background: linear-gradient(145deg, #fbbf24, #f59e0b); animation: pulse-soft 2s infinite; }
+    @keyframes pulse-soft { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+    .loading-spinner { border: 4px solid #e2e8f0; border-top: 4px solid #0b1a2f; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #e2e8f0; }
+    ::-webkit-scrollbar-thumb { background: #0b1a2f; border-radius: 6px; }
+    .logo-text { letter-spacing: 1px; font-weight: 700; }
+    /* store image container */
+    .store-image-container { overflow: hidden; position: relative; }
+    .store-image-container img { transition: transform 0.4s ease; }
+    .store-image-container:hover img { transform: scale(1.06); }
+  </style>
 </head>
-<body class="bg-gray-50">
-    
-    <!-- Navigation Bar -->
-    <nav id="navbar" class="bg-sef-navy text-white sticky top-0 z-50 shadow-lg" style="background: linear-gradient(135deg, #0A192F 0%, #1B2A4A 100%);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <img src="https://www.sefalana.co.bw/wp-content/uploads/2021/03/Sefalana-Logo.png" 
-                             alt="Sefalana Logo" 
-                             class="w-12 h-12 rounded-full object-contain bg-white p-1 shadow-lg"
-                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22%3E%3Crect width=%2248%22 height=%2248%22 fill=%22%23FFD700%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%230A192F%22 font-size=%2224%22 font-weight=%22bold%22%3ES%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <div class="ml-3">
-                        <h1 class="text-xl font-bold tracking-wide">SEFALANA</h1>
-                        <p class="text-xs text-gray-300">Retail & Wholesale</p>
-                    </div>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link hover:text-sef-gold transition-colors">Home</a>
-                    <a href="#specials" class="nav-link hover:text-sef-gold transition-colors">Specials</a>
-                    <a href="#stores" class="nav-link hover:text-sef-gold transition-colors">Store Locator</a>
-                    <a href="#supplier" class="nav-link hover:text-sef-gold transition-colors">B2B Supplier</a>
-                    <a href="#admin" class="btn-gold px-6 py-2 rounded-lg font-semibold shadow-lg">
-                        Admin Portal
-                    </a>
-                </div>
-                
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-sef-gold transition-colors">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-sef-deepblue shadow-xl">
-            <a href="#home" class="block px-4 py-3 hover:bg-sef-lightblue transition-colors">Home</a>
-            <a href="#specials" class="block px-4 py-3 hover:bg-sef-lightblue transition-colors">Specials</a>
-            <a href="#stores" class="block px-4 py-3 hover:bg-sef-lightblue transition-colors">Store Locator</a>
-            <a href="#supplier" class="block px-4 py-3 hover:bg-sef-lightblue transition-colors">B2B Supplier</a>
-            <a href="#admin" class="block px-4 py-3 bg-sef-gold text-sef-navy font-semibold">Admin Portal</a>
-        </div>
-    </nav>
+<body>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative bg-sef-navy text-white overflow-hidden" style="background: linear-gradient(135deg, #0A192F 0%, #1B2A4A 50%, #2C3E50 100%);">
-        <!-- Background Image with Overlay -->
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Supermarket" 
-                 class="w-full h-full object-cover opacity-10"
-                 onerror="this.style.display='none'">
-            <div class="absolute inset-0 bg-gradient-to-br from-sef-navy via-sef-deepblue to-sef-lightblue opacity-90"></div>
+<!-- Navigation (with new logo) -->
+<nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo: replaced with Sefalana Shopper style (text + icon) -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
+          <span class="text-sef-navy font-extrabold text-xl">S</span>
         </div>
-        
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-            <div class="text-center animate-fade-in">
-                <h2 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-                    Welcome to <span class="gradient-text">Sefalana</span>
-                </h2>
-                <p class="text-xl md:text-2xl text-gray-300 mb-4">
-                    Botswana's Leading FMCG & Retail Wholesale Giant
-                </p>
-                <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
-                    Serving Botswana since 1974 with quality products, unbeatable prices, 
-                    and exceptional customer service across the nation.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#specials" class="btn-gold px-10 py-4 rounded-lg font-semibold shadow-xl text-lg">
-                        View Weekly Specials
-                    </a>
-                    <a href="#stores" class="bg-white text-sef-navy px-10 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl text-lg">
-                        Find a Store
-                    </a>
-                </div>
-            </div>
+        <div>
+          <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
+          <span class="block text-[10px] uppercase tracking-[0.2em] text-gold font-medium">Shopper</span>
         </div>
-        
-        <!-- Stats Bar -->
-        <div class="relative bg-black bg-opacity-30 backdrop-blur-sm border-t border-white border-opacity-10">
-            <div class="max-w-7xl mx-auto px-4 py-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                    <div>
-                        <p class="text-4xl font-bold text-sef-gold">50+</p>
-                        <p class="text-sm text-gray-300 mt-1">Years of Service</p>
-                    </div>
-                    <div>
-                        <p class="text-4xl font-bold text-sef-gold">20+</p>
-                        <p class="text-sm text-gray-300 mt-1">Store Locations</p>
-                    </div>
-                    <div>
-                        <p class="text-4xl font-bold text-sef-gold">10k+</p>
-                        <p class="text-sm text-gray-300 mt-1">Products</p>
-                    </div>
-                    <div>
-                        <p class="text-4xl font-bold text-sef-gold">1M+</p>
-                        <p class="text-sm text-gray-300 mt-1">Happy Customers</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      </div>
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+        <a href="#home" class="nav-link text-white/90 hover:text-gold transition">Home</a>
+        <a href="#specials" class="nav-link text-white/90 hover:text-gold transition">Specials</a>
+        <a href="#stores" class="nav-link text-white/90 hover:text-gold transition">Store Locator</a>
+        <a href="#supplier" class="nav-link text-white/90 hover:text-gold transition">B2B Supplier</a>
+        <a href="#admin" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin Portal</a>
+      </div>
+      <!-- Mobile button -->
+      <div class="md:hidden">
+        <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
+    <a href="#home" class="block py-2 hover:text-gold transition">Home</a>
+    <a href="#specials" class="block py-2 hover:text-gold transition">Specials</a>
+    <a href="#stores" class="block py-2 hover:text-gold transition">Store Locator</a>
+    <a href="#supplier" class="block py-2 hover:text-gold transition">B2B Supplier</a>
+    <a href="#admin" class="block py-2 text-gold font-semibold">Admin Portal</a>
+  </div>
+</nav>
 
-    <!-- Weekly Specials Section -->
-    <section id="specials" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-sef-navy mb-4">
-                    This Week's Special Combos
-                </h2>
-                <div class="w-24 h-1 bg-sef-gold mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
-                    Grab unbeatable deals on our most popular combos. Limited time offers at all Sefalana stores nationwide.
-                </p>
-            </div>
-            
-            <!-- Specials Filter -->
-            <div class="flex flex-wrap justify-center gap-4 mb-10">
-                <button onclick="filterSpecials('all')" class="special-filter px-6 py-2 rounded-full font-medium bg-sef-navy text-white shadow-lg transition-all" data-filter="all">
-                    All Specials
-                </button>
-                <button onclick="filterSpecials('featured')" class="special-filter px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow-md hover:shadow-lg transition-all" data-filter="featured">
-                    Featured
-                </button>
-                <button onclick="filterSpecials('food')" class="special-filter px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow-md hover:shadow-lg transition-all" data-filter="food">
-                    Food & Beverages
-                </button>
-                <button onclick="filterSpecials('household')" class="special-filter px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow-md hover:shadow-lg transition-all" data-filter="household">
-                    Household
-                </button>
-            </div>
-            
-            <!-- Specials Grid -->
-            <div id="specialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Specials will be loaded dynamically -->
-                <div class="col-span-full text-center py-12">
-                    <div class="loading-spinner mx-auto"></div>
-                    <p class="text-gray-500 mt-4">Loading specials...</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Hero Section -->
+<section id="home" class="relative bg-sef-navy text-white overflow-hidden" style="background: linear-gradient(145deg, #0b1a2f 0%, #142b42 100%);">
+  <div class="absolute inset-0 opacity-10 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop');"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
+    <div class="animate-[fadeIn_0.6s_ease]">
+      <h2 class="text-5xl md:text-7xl font-extrabold leading-tight">Welcome to <span class="text-gold">Sefalana</span></h2>
+      <p class="text-xl md:text-2xl text-gray-300 mt-4">Botswana's Leading FMCG & Retail Wholesale Giant</p>
+      <p class="text-gray-400 max-w-2xl mx-auto mt-4 text-lg">Since 1974 · quality products, unbeatable prices, nationwide service.</p>
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
+        <a href="#specials" class="btn-gold px-10 py-4 rounded-xl font-bold shadow-2xl text-lg">View Weekly Specials</a>
+        <a href="#stores" class="bg-white text-sef-navy px-10 py-4 rounded-xl font-bold shadow-2xl text-lg hover:bg-gray-100 transition">Find a Store</a>
+      </div>
+    </div>
+  </div>
+  <!-- Stats -->
+  <div class="relative bg-black/30 backdrop-blur-sm border-t border-white/10 py-6">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <div><span class="text-4xl font-bold text-gold">50+</span><p class="text-xs text-gray-300 mt-1">Years</p></div>
+      <div><span class="text-4xl font-bold text-gold">20+</span><p class="text-xs text-gray-300 mt-1">Stores</p></div>
+      <div><span class="text-4xl font-bold text-gold">10k+</span><p class="text-xs text-gray-300 mt-1">Products</p></div>
+      <div><span class="text-4xl font-bold text-gold">1M+</span><p class="text-xs text-gray-300 mt-1">Happy Customers</p></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Store Locator Section -->
-    <section id="stores" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-sef-navy mb-4">
-                    Find a Sefalana Store Near You
-                </h2>
-                <div class="w-24 h-1 bg-sef-gold mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
-                    With stores across Botswana, there's always a Sefalana nearby to serve you.
-                </p>
-            </div>
-            
-            <!-- Search and Filters -->
-            <div class="bg-gray-50 rounded-xl shadow-lg p-6 mb-10 border border-gray-200">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Search</label>
-                        <input type="text" id="storeSearch" oninput="filterStores()" placeholder="Search by name or address..." 
-                               class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">City</label>
-                        <select id="cityFilter" onchange="filterStores()" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
-                            <option value="">All Cities</option>
-                            <option value="Gaborone">Gaborone</option>
-                            <option value="Francistown">Francistown</option>
-                            <option value="Maun">Maun</option>
-                            <option value="Broadhurst">Broadhurst</option>
-                            <option value="Mogoditshane">Mogoditshane</option>
-                            <option value="Selebi-Phikwe">Selebi-Phikwe</option>
-                            <option value="Tlokweng">Tlokweng</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Store Format</label>
-                        <select id="formatFilter" onchange="filterStores()" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
-                            <option value="">All Formats</option>
-                            <option value="Sefalana Hyper">Sefalana Hyper</option>
-                            <option value="Sefalana Shopper">Sefalana Shopper</option>
-                            <option value="Cash & Carry">Cash & Carry</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Store Cards Grid -->
-            <div id="storesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Stores will be loaded dynamically -->
-                <div class="col-span-full text-center py-12">
-                    <div class="loading-spinner mx-auto"></div>
-                    <p class="text-gray-500 mt-4">Loading stores...</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Weekly Specials -->
+<section id="specials" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-sef-navy">This Week’s Special Combos</h2>
+      <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
+      <p class="text-gray-600 max-w-2xl mx-auto text-lg">Unbeatable deals at all Sefalana stores. Limited time.</p>
+    </div>
+    <!-- filter -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <button onclick="filterSpecials('all')" class="special-filter px-6 py-2 rounded-full font-medium bg-sef-navy text-white shadow" data-filter="all">All</button>
+      <button onclick="filterSpecials('featured')" class="special-filter px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md" data-filter="featured">Featured</button>
+      <button onclick="filterSpecials('food')" class="special-filter px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md" data-filter="food">Food</button>
+      <button onclick="filterSpecials('household')" class="special-filter px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md" data-filter="household">Household</button>
+    </div>
+    <div id="specialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="col-span-full text-center py-12"><div class="loading-spinner mx-auto"></div><p class="text-gray-500 mt-4">Loading specials...</p></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Supplier Inquiry Section -->
-    <section id="supplier" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-sef-navy mb-4">
-                    Become a Sefalana Supplier
-                </h2>
-                <div class="w-24 h-1 bg-sef-gold mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
-                    Partner with Botswana's leading retailer. Submit your business inquiry and our procurement team will contact you.
-                </p>
-            </div>
-            
-            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
-                <div id="supplierSuccess" class="hidden bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
-                    Thank you for your interest! Our team will contact you within 2 business days.
-                </div>
-                
-                <form id="supplierForm" onsubmit="submitSupplierInquiry(event)" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Company Name *</label>
-                            <input type="text" id="companyName" required minlength="2"
-                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Contact Person *</label>
-                            <input type="text" id="contactPerson" required minlength="2"
-                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg">
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-                            <input type="email" id="supplierEmail" required
-                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
-                            <input type="tel" id="supplierPhone" required pattern="[0-9+]{10,}"
-                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg">
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Business Type</label>
-                            <select id="businessType" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg">
-                                <option value="">Select Type</option>
-                                <option value="manufacturer">Manufacturer</option>
-                                <option value="distributor">Distributor</option>
-                                <option value="wholesaler">Wholesaler</option>
-                                <option value="farmer">Farmer/Producer</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Annual Revenue Range</label>
-                            <select id="revenueRange" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg">
-                                <option value="">Select Range</option>
-                                <option value="under-1m">Under P1 Million</option>
-                                <option value="1m-5m">P1 Million - P5 Million</option>
-                                <option value="5m-20m">P5 Million - P20 Million</option>
-                                <option value="over-20m">Over P20 Million</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Product Categories</label>
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                            <label class="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                                <input type="checkbox" value="Food & Beverages" class="product-category mr-2">
-                                <span class="text-sm">Food & Beverages</span>
-                            </label>
-                            <label class="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                                <input type="checkbox" value="Household" class="product-category mr-2">
-                                <span class="text-sm">Household</span>
-                            </label>
-                            <label class="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                                <input type="checkbox" value="Electronics" class="product-category mr-2">
-                                <span class="text-sm">Electronics</span>
-                            </label>
-                            <label class="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                                <input type="checkbox" value="Clothing" class="product-category mr-2">
-                                <span class="text-sm">Clothing</span>
-                            </label>
-                            <label class="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                                <input type="checkbox" value="Construction" class="product-category mr-2">
-                                <span class="text-sm">Construction</span>
-                            </label>
-                            <label class="flex items-center p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-                                <input type="checkbox" value="Agriculture" class="product-category mr-2">
-                                <span class="text-sm">Agriculture</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
-                        <textarea id="supplierMessage" required minlength="10" rows="4"
-                                  class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg"
-                                  placeholder="Tell us about your products and services..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary w-full py-4 rounded-lg font-semibold text-lg shadow-lg">
-                        Submit Inquiry
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
+<!-- Store Locator -->
+<section id="stores" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-sef-navy">Find a Store Near You</h2>
+      <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
+    </div>
+    <div class="bg-gray-50 rounded-xl shadow-lg p-6 mb-10 border border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <input type="text" id="storeSearch" oninput="filterStores()" placeholder="Search name or address..." class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+        <select id="cityFilter" onchange="filterStores()" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+          <option value="">All Cities</option><option>Gaborone</option><option>Francistown</option><option>Maun</option><option>Broadhurst</option><option>Mogoditshane</option><option>Selebi-Phikwe</option><option>Tlokweng</option>
+        </select>
+        <select id="formatFilter" onchange="filterStores()" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+          <option value="">All Formats</option><option>Sefalana Hyper</option><option>Sefalana Shopper</option><option>Cash & Carry</option>
+        </select>
+      </div>
+    </div>
+    <div id="storesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="col-span-full text-center py-12"><div class="loading-spinner mx-auto"></div><p class="text-gray-500 mt-4">Loading stores...</p></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Admin Portal Section -->
-    <section id="admin" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-sef-navy mb-4">
-                    Admin Portal
-                </h2>
-                <div class="w-24 h-1 bg-sef-gold mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
-                    Secure access for Sefalana staff to manage stores, specials, and supplier inquiries.
-                </p>
-            </div>
-            
-            <div class="max-w-md mx-auto bg-gray-50 rounded-xl shadow-2xl p-8 border border-gray-200">
-                <div id="adminError" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4"></div>
-                
-                <form id="adminLoginForm" onsubmit="adminLogin(event)" class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                        <input type="email" id="adminEmail" required placeholder="admin@sefalana.co.bw"
-                               class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
-                        <input type="password" id="adminPassword" required minlength="6" placeholder="••••••••"
-                               class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
-                    </div>
-                    <button type="submit" class="btn-primary w-full py-3 rounded-lg font-semibold shadow-lg">
-                        Sign In
-                    </button>
-                </form>
-            </div>
-            
-            <!-- Admin Dashboard (Hidden until login) -->
-            <div id="adminDashboard" class="hidden mt-12">
-                <div class="bg-white rounded-xl shadow-2xl p-6 mb-8 border border-gray-200">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-2xl font-bold text-sef-navy">Dashboard</h3>
-                        <button onclick="adminLogout()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all shadow-md">
-                            Logout
-                        </button>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                        <div class="bg-blue-50 rounded-lg p-6 text-center shadow-md">
-                            <p class="text-3xl font-bold text-sef-navy" id="totalStores">0</p>
-                            <p class="text-gray-600 mt-2">Total Stores</p>
-                        </div>
-                        <div class="bg-yellow-50 rounded-lg p-6 text-center shadow-md">
-                            <p class="text-3xl font-bold text-sef-navy" id="activeSpecials">0</p>
-                            <p class="text-gray-600 mt-2">Active Specials</p>
-                        </div>
-                        <div class="bg-green-50 rounded-lg p-6 text-center shadow-md">
-                            <p class="text-3xl font-bold text-sef-navy" id="pendingInquiries">0</p>
-                            <p class="text-gray-600 mt-2">Pending Inquiries</p>
-                        </div>
-                        <div class="bg-purple-50 rounded-lg p-6 text-center shadow-md">
-                            <p class="text-3xl font-bold text-sef-navy">P2.5M</p>
-                            <p class="text-gray-600 mt-2">Monthly Revenue</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-xl shadow-2xl p-6 border border-gray-200">
-                    <h3 class="text-xl font-bold text-sef-navy mb-4">Recent Supplier Inquiries</h3>
-                    <div id="adminInquiries" class="space-y-4">
-                        <!-- Inquiries will be loaded here -->
-                    </div>
-                </div>
-            </div>
+<!-- Supplier Inquiry -->
+<section id="supplier" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-sef-navy">Become a Supplier</h2>
+      <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
+      <p class="text-gray-600 max-w-2xl mx-auto text-lg">Partner with Botswana’s leading retailer. Submit your inquiry.</p>
+    </div>
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-2xl p-8 border border-gray-200">
+      <div id="supplierSuccess" class="hidden bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">Thank you! Our team will contact you within 2 business days.</div>
+      <form id="supplierForm" onsubmit="submitSupplierInquiry(event)" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-semibold text-gray-700 mb-1">Company *</label><input type="text" id="companyName" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg"></div>
+          <div><label class="block text-sm font-semibold text-gray-700 mb-1">Contact Person *</label><input type="text" id="contactPerson" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg"></div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-white py-12" style="background: linear-gradient(135deg, #0A192F 0%, #1B2A4A 100%);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Sefalana Group</h3>
-                    <p class="text-gray-400">
-                        Serving Botswana since 1974 with quality products and exceptional service.
-                    </p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#specials" class="text-gray-400 hover:text-sef-gold transition-colors">Weekly Specials</a></li>
-                        <li><a href="#stores" class="text-gray-400 hover:text-sef-gold transition-colors">Store Locator</a></li>
-                        <li><a href="#supplier" class="text-gray-400 hover:text-sef-gold transition-colors">Become a Supplier</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Contact Us</h3>
-                    <p class="text-gray-400">Plot 54376, Gaborone West Industrial</p>
-                    <p class="text-gray-400">Gaborone, Botswana</p>
-                    <p class="text-gray-400">Tel: +267 391 4222</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-500">© 26 August 2026 Sefalana. All rights reserved.</p>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-semibold text-gray-700 mb-1">Email *</label><input type="email" id="supplierEmail" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg"></div>
+          <div><label class="block text-sm font-semibold text-gray-700 mb-1">Phone *</label><input type="tel" id="supplierPhone" required pattern="[0-9+]{10,}" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg"></div>
         </div>
-    </footer>
+        <div><label class="block text-sm font-semibold text-gray-700 mb-1">Message *</label><textarea id="supplierMessage" required rows="3" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Tell us about your products..."></textarea></div>
+        <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-lg shadow-lg">Submit Inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
 
-    <!-- JavaScript - Application Logic -->
-    <script>
-        // Data Store (Simulated Database) with Real Images
-        const sefalanaData = {
-            stores: [
-                { 
-                    id: 1, 
-                    name: 'Sefalana Hyper Gaborone', 
-                    format: 'Sefalana Hyper', 
-                    address: 'Plot 54376, Gaborone West Industrial', 
-                    city: 'Gaborone', 
-                    region: 'South-East', 
-                    phone: '+267 391 4222', 
-                    email: 'hyper.gabs@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 07:00-19:00, Sat: 07:00-17:00, Sun: 08:00-14:00',
-                    image: 'https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                },
-                { 
-                    id: 2, 
-                    name: 'Sefalana Shopper Main Mall', 
-                    format: 'Sefalana Shopper', 
-                    address: 'Main Mall, Gaborone', 
-                    city: 'Gaborone', 
-                    region: 'South-East', 
-                    phone: '+267 397 2153', 
-                    email: 'shopper.mainmall@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 08:00-18:00, Sat: 08:00-16:00, Sun: 09:00-13:00',
-                    image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                },
-                { 
-                    id: 3, 
-                    name: 'Sefalana Cash & Carry Francistown', 
-                    format: 'Cash & Carry', 
-                    address: 'Plot 2145, Light Industrial', 
-                    city: 'Francistown', 
-                    region: 'North-East', 
-                    phone: '+267 241 2278', 
-                    email: 'cnc.ftown@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 07:30-18:30, Sat: 08:00-16:00, Sun: Closed',
-                    image: 'https://images.unsplash.com/photo-1583258292688-d02187dcbea8?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                },
-                { 
-                    id: 4, 
-                    name: 'Sefalana Shopper Broadhurst', 
-                    format: 'Sefalana Shopper', 
-                    address: 'Plot 1058, Broadhurst Mall', 
-                    city: 'Broadhurst', 
-                    region: 'South-East', 
-                    phone: '+267 393 7645', 
-                    email: 'shopper.broadhurst@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 08:00-19:00, Sat: 08:00-17:00, Sun: 09:00-14:00',
-                    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                },
-                { 
-                    id: 5, 
-                    name: 'Sefalana Hyper Maun', 
-                    format: 'Sefalana Hyper', 
-                    address: 'Plot 78, Maun Industrial', 
-                    city: 'Maun', 
-                    region: 'North-West', 
-                    phone: '+267 686 0492', 
-                    email: 'hyper.maun@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 07:30-19:00, Sat: 08:00-16:00, Sun: 09:00-13:00',
-                    image: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                },
-                { 
-                    id: 6, 
-                    name: 'Sefalana Cash & Carry Mogoditshane', 
-                    format: 'Cash & Carry', 
-                    address: 'Plot 3928, Mogoditshane', 
-                    city: 'Mogoditshane', 
-                    region: 'South-East', 
-                    phone: '+267 318 9311', 
-                    email: 'cnc.mogoditshane@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 07:00-18:30, Sat: 08:00-16:00, Sun: Closed',
-                    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                },
-                { 
-                    id: 7, 
-                    name: 'Sefalana Shopper Selebi-Phikwe', 
-                    format: 'Sefalana Shopper', 
-                    address: 'Plot 2934, Town Centre', 
-                    city: 'Selebi-Phikwe', 
-                    region: 'Central', 
-                    phone: '+267 261 0756', 
-                    email: 'shopper.spikwe@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 08:00-18:00, Sat: 08:00-15:00, Sun: Closed',
-                    image: 'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                },
-                { 
-                    id: 8, 
-                    name: 'Sefalana Hyper Tlokweng', 
-                    format: 'Sefalana Hyper', 
-                    address: 'Plot 745, Tlokweng', 
-                    city: 'Tlokweng', 
-                    region: 'South-East', 
-                    phone: '+267 392 5418', 
-                    email: 'hyper.tlokweng@sefalana.co.bw', 
-                    hours: 'Mon-Fri: 07:30-19:30, Sat: 08:00-17:00, Sun: 09:00-14:00',
-                    image: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop',
-                    isActive: true 
-                }
-            ],
-            
-            specials: [
-                { 
-                    id: 1, 
-                    title: 'Tiger Combo Special', 
-                    description: 'Tiger bread + 2L Coke + 1kg Sugar', 
-                    comboName: 'Tiger Combo', 
-                    originalPrice: 89.99, 
-                    specialPrice: 65.00, 
-                    category: 'food', 
-                    imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop',
-                    isFeatured: true, 
-                    savings: '27.78%' 
-                },
-                { 
-                    id: 2, 
-                    title: 'Economy Combo', 
-                    description: '10kg Maize Meal + 2L Cooking Oil + 1kg Sugar Beans', 
-                    comboName: 'Economy Combo', 
-                    originalPrice: 249.99, 
-                    specialPrice: 199.99, 
-                    category: 'food', 
-                    imageUrl: 'https://images.unsplash.com/photo-1506807803488-8eafc15316c5?q=80&w=2070&auto=format&fit=crop',
-                    isFeatured: true, 
-                    savings: '20.00%' 
-                },
-                { 
-                    id: 3, 
-                    title: 'Family Breakfast Pack', 
-                    description: '2kg Corn Flakes + 2L Long Life Milk + 500g Tea', 
-                    comboName: 'Breakfast Combo', 
-                    originalPrice: 159.99, 
-                    specialPrice: 129.99, 
-                    category: 'food', 
-                    imageUrl: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=2070&auto=format&fit=crop',
-                    isFeatured: true, 
-                    savings: '18.75%' 
-                },
-                { 
-                    id: 4, 
-                    title: 'Braai Day Special', 
-                    description: '2kg Mixed Meat + 2L Cold Drink + 500g Salad', 
-                    comboName: 'Braai Combo', 
-                    originalPrice: 189.99, 
-                    specialPrice: 149.99, 
-                    category: 'food', 
-                    imageUrl: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=2070&auto=format&fit=crop',
-                    isFeatured: false, 
-                    savings: '21.06%' 
-                },
-                { 
-                    id: 5, 
-                    title: 'Cleaning Essentials', 
-                    description: '5L Bleach + 2L Dishwashing Liquid + 500g Powder', 
-                    comboName: 'Cleaning Combo', 
-                    originalPrice: 129.99, 
-                    specialPrice: 99.99, 
-                    category: 'household', 
-                    imageUrl: 'https://images.unsplash.com/photo-1585421514738-01798e348b17?q=80&w=2070&auto=format&fit=crop',
-                    isFeatured: false, 
-                    savings: '23.08%' 
-                },
-                { 
-                    id: 6, 
-                    title: 'Student Survival Pack', 
-                    description: '5kg Rice + 1L Cooking Oil + 500g Salt', 
-                    comboName: 'Student Pack', 
-                    originalPrice: 119.99, 
-                    specialPrice: 89.99, 
-                    category: 'food', 
-                    imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2070&auto=format&fit=crop',
-                    isFeatured: true, 
-                    savings: '25.00%' 
-                }
-            ],
-            
-            supplierInquiries: [
-                { 
-                    id: 1, 
-                    companyName: 'Botswana Fresh Produce', 
-                    contactPerson: 'John Kgosi', 
-                    email: 'john@botswanafresh.co.bw', 
-                    phone: '+267 71234567', 
-                    message: 'We supply fresh vegetables and fruits from local farmers.', 
-                    status: 'pending', 
-                    date: '2024-01-15' 
-                },
-                { 
-                    id: 2, 
-                    companyName: 'Kgalagadi Beverages', 
-                    contactPerson: 'Mary Mokgadi', 
-                    email: 'mary@kgalagadibev.co.bw', 
-                    phone: '+267 72345678', 
-                    message: 'Local beverage manufacturer looking to partner with Sefalana.', 
-                    status: 'contacted', 
-                    date: '2024-01-14' 
-                }
-            ],
-            
-            adminUsers: [
-                { 
-                    id: 1, 
-                    email: 'admin@sefalana.co.bw', 
-                    passwordHash: 'hashed_password_here', 
-                    fullName: 'System Administrator', 
-                    role: 'admin' 
-                }
-            ]
-        };
-        
-        // Security Utilities
-        const SecurityUtils = {
-            rateLimit: new Map(),
-            
-            checkRateLimit(key, maxAttempts = 100, windowMs = 900000) {
-                const now = Date.now();
-                const userAttempts = this.rateLimit.get(key) || [];
-                const recentAttempts = userAttempts.filter(timestamp => now - timestamp < windowMs);
-                
-                if (recentAttempts.length >= maxAttempts) {
-                    return false;
-                }
-                
-                recentAttempts.push(now);
-                this.rateLimit.set(key, recentAttempts);
-                return true;
-            },
-            
-            sanitizeInput(input) {
-                if (typeof input !== 'string') return input;
-                
-                return input
-                    .replace(/<[^>]*>/g, '')
-                    .replace(/[<>'"&]/g, (char) => {
-                        const entities = {
-                            '<': '&lt;',
-                            '>': '&gt;',
-                            '"': '&quot;',
-                            "'": '&#x27;',
-                            '&': '&amp;'
-                        };
-                        return entities[char];
-                    })
-                    .trim();
-            },
-            
-            validateEmail(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            },
-            
-            validatePhone(phone) {
-                const phoneRegex = /^\+?[\d\s-]{10,}$/;
-                return phoneRegex.test(phone);
-            },
-            
-            generateToken(payload) {
-                const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-                const body = btoa(JSON.stringify({
-                    ...payload,
-                    exp: Date.now() + (24 * 60 * 60 * 1000)
-                }));
-                const signature = btoa('sefalana-secret-key');
-                
-                return `${header}.${body}.${signature}`;
-            },
-            
-            verifyToken(token) {
-                try {
-                    const parts = token.split('.');
-                    if (parts.length !== 3) return null;
-                    
-                    const payload = JSON.parse(atob(parts[1]));
-                    
-                    if (payload.exp < Date.now()) {
-                        return null;
-                    }
-                    
-                    return payload;
-                } catch (error) {
-                    return null;
-                }
-            },
-            
-            hashPassword(password) {
-                let hash = 0;
-                for (let i = 0; i < password.length; i++) {
-                    const char = password.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
-                }
-                return `hashed_${hash}`;
-            },
-            
-            verifyPassword(password, hash) {
-                return this.hashPassword(password) === hash;
-            }
-        };
-        
-        // Mobile Menu Functions
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
-        
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuButton = event.target.closest('button');
-            
-            if (mobileMenu && !mobileMenu.classList.contains('hidden') && 
-                !menuButton && !mobileMenu.contains(event.target)) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
-        
-        // Store Locator Functions
-        function filterStores() {
-            const searchTerm = SecurityUtils.sanitizeInput(document.getElementById('storeSearch').value.toLowerCase());
-            const cityFilter = document.getElementById('cityFilter').value;
-            const formatFilter = document.getElementById('formatFilter').value;
-            
-            const filteredStores = sefalanaData.stores.filter(store => {
-                const matchesSearch = !searchTerm || 
-                    store.name.toLowerCase().includes(searchTerm) ||
-                    store.address.toLowerCase().includes(searchTerm);
-                const matchesCity = !cityFilter || store.city === cityFilter;
-                const matchesFormat = !formatFilter || store.format === formatFilter;
-                
-                return matchesSearch && matchesCity && matchesFormat;
-            });
-            
-            renderStores(filteredStores);
-        }
-        
-        function renderStores(stores) {
-            const storesGrid = document.getElementById('storesGrid');
-            
-            if (stores.length === 0) {
-                storesGrid.innerHTML = `
-                    <div class="col-span-full text-center py-8">
-                        <p class="text-gray-500">No stores found matching your criteria.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            storesGrid.innerHTML = stores.map(store => `
-                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
-                    <div class="store-image-container h-48">
-                        <img src="${store.image}" alt="${store.name}" 
-                             class="w-full h-full object-cover image-hover" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop'">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-start justify-between mb-4">
-                            <div>
-                                <h3 class="text-lg font-bold text-sef-navy">${store.name}</h3>
-                                <span class="inline-block bg-sef-navy text-white text-xs px-3 py-1 rounded-full mt-2">
-                                    ${store.format}
-                                </span>
-                            </div>
-                            <span class="text-2xl">📍</span>
-                        </div>
-                        
-                        <div class="space-y-2 text-gray-600">
-                            <p class="text-sm">${store.address}</p>
-                            <p class="text-sm font-medium">${store.city}, ${store.region}</p>
-                            <p class="text-sm">📞 ${store.phone}</p>
-                            <p class="text-sm">✉️ ${store.email}</p>
-                            <p class="text-xs text-gray-400 mt-2">🕐 ${store.hours}</p>
-                        </div>
-                        
-                        <button onclick="viewStoreDetails(${store.id})" 
-                                class="mt-4 w-full bg-white border border-sef-navy text-sef-navy py-2 rounded-lg font-medium hover:bg-sef-navy hover:text-white transition-all">
-                            View Details
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function viewStoreDetails(storeId) {
-            const store = sefalanaData.stores.find(s => s.id === storeId);
-            if (store) {
-                alert(`
-                    Store Details:
-                    Name: ${store.name}
-                    Format: ${store.format}
-                    Address: ${store.address}
-                    City: ${store.city}
-                    Phone: ${store.phone}
-                    Email: ${store.email}
-                    Hours: ${store.hours}
-                `);
-            }
-        }
-        
-        // Specials Functions
-        function filterSpecials(filter) {
-            document.querySelectorAll('.special-filter').forEach(btn => {
-                if (btn.dataset.filter === filter) {
-                    btn.classList.add('bg-sef-navy', 'text-white');
-                    btn.classList.remove('bg-white', 'text-sef-navy');
-                } else {
-                    btn.classList.remove('bg-sef-navy', 'text-white');
-                    btn.classList.add('bg-white', 'text-sef-navy');
-                }
-            });
-            
-            let filteredSpecials;
-            if (filter === 'all') {
-                filteredSpecials = sefalanaData.specials;
-            } else if (filter === 'featured') {
-                filteredSpecials = sefalanaData.specials.filter(s => s.isFeatured);
-            } else {
-                filteredSpecials = sefalanaData.specials.filter(s => s.category === filter);
-            }
-            
-            renderSpecials(filteredSpecials);
-        }
-        
-        function renderSpecials(specials) {
-            const specialsGrid = document.getElementById('specialsGrid');
-            
-            specialsGrid.innerHTML = specials.map(special => `
-                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="store-image-container relative h-48 bg-gray-200">
-                        <img src="${special.imageUrl}" alt="${special.title}" 
-                             class="w-full h-full object-cover image-hover" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop'">
-                        ${special.isFeatured ? `
-                            <span class="absolute top-2 right-2 bg-sef-gold text-sef-navy text-xs font-bold px-2 py-1 rounded-full shadow-lg z-10">
-                                ⭐ FEATURED
-                            </span>
-                        ` : ''}
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-sef-navy mb-2">
-                            ${special.comboName}
-                        </h3>
-                        <p class="text-gray-600 mb-4">${special.description}</p>
-                        
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <span class="text-2xl font-bold text-sef-navy">P${special.specialPrice.toFixed(2)}</span>
-                                <span class="ml-2 text-gray-400 line-through">P${special.originalPrice.toFixed(2)}</span>
-                            </div>
-                            <span class="savings-badge text-sef-navy text-sm font-semibold px-3 py-1 rounded-full shadow-md">
-                                Save ${special.savings}
-                            </span>
-                        </div>
-                        
-                        <button onclick="addToCart('${special.comboName}')" 
-                                class="btn-primary w-full py-2 rounded-lg font-medium">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function addToCart(comboName) {
-            alert(`${comboName} added to cart! (Demo feature)`);
-        }
-        
-        // Supplier Inquiry Functions
-        function submitSupplierInquiry(event) {
-            event.preventDefault();
-            
-            if (!SecurityUtils.checkRateLimit('supplier', 5, 60000)) {
-                alert('Too many submissions. Please try again later.');
-                return false;
-            }
-            
-            const companyName = SecurityUtils.sanitizeInput(document.getElementById('companyName').value);
-            const contactPerson = SecurityUtils.sanitizeInput(document.getElementById('contactPerson').value);
-            const email = SecurityUtils.sanitizeInput(document.getElementById('supplierEmail').value);
-            const phone = SecurityUtils.sanitizeInput(document.getElementById('supplierPhone').value);
-            const businessType = document.getElementById('businessType').value;
-            const revenueRange = document.getElementById('revenueRange').value;
-            const message = SecurityUtils.sanitizeInput(document.getElementById('supplierMessage').value);
-            
-            if (!SecurityUtils.validateEmail(email)) {
-                alert('Please enter a valid email address.');
-                return false;
-            }
-            
-            if (!SecurityUtils.validatePhone(phone)) {
-                alert('Please enter a valid phone number.');
-                return false;
-            }
-            
-            const categories = Array.from(document.querySelectorAll('.product-category:checked'))
-                .map(checkbox => checkbox.value);
-            
-            const inquiry = {
-                id: sefalanaData.supplierInquiries.length + 1,
-                companyName,
-                contactPerson,
-                email,
-                phone,
-                businessType,
-                revenueRange,
-                categories,
-                message,
-                status: 'pending',
-                date: new Date().toISOString().split('T')[0]
-            };
-            
-            sefalanaData.supplierInquiries.push(inquiry);
-            
-            const successDiv = document.getElementById('supplierSuccess');
-            successDiv.classList.remove('hidden');
-            
-            document.getElementById('supplierForm').reset();
-            
-            setTimeout(() => {
-                successDiv.classList.add('hidden');
-            }, 5000);
-            
-            console.log('Supplier inquiry submitted:', inquiry);
-            
-            return false;
-        }
-        
-        // Admin Functions
-        function adminLogin(event) {
-            event.preventDefault();
-            
-            if (!SecurityUtils.checkRateLimit('admin-login', 5, 60000)) {
-                document.getElementById('adminError').textContent = 'Too many attempts. Please try again later.';
-                document.getElementById('adminError').classList.remove('hidden');
-                return false;
-            }
-            
-            const email = SecurityUtils.sanitizeInput(document.getElementById('adminEmail').value);
-            const password = document.getElementById('adminPassword').value;
-            
-            const adminUser = sefalanaData.adminUsers.find(user => user.email === email);
-            
-            if (!adminUser || !SecurityUtils.verifyPassword(password, adminUser.passwordHash)) {
-                document.getElementById('adminError').textContent = 'Invalid email or password.';
-                document.getElementById('adminError').classList.remove('hidden');
-                return false;
-            }
-            
-            const token = SecurityUtils.generateToken({
-                id: adminUser.id,
-                email: adminUser.email,
-                role: adminUser.role
-            });
-            
-            sessionStorage.setItem('admin_token', token);
-            sessionStorage.setItem('admin_user', JSON.stringify(adminUser));
-            
-            showAdminDashboard();
-            
-            return false;
-        }
-        
-        function showAdminDashboard() {
-            const token = sessionStorage.getItem('admin_token');
-            
-            if (!token || !SecurityUtils.verifyToken(token)) {
-                alert('Session expired. Please login again.');
-                return;
-            }
-            
-            document.getElementById('adminLoginForm').classList.add('hidden');
-            document.getElementById('adminError').classList.add('hidden');
-            
-            document.getElementById('adminDashboard').classList.remove('hidden');
-            
-            document.getElementById('totalStores').textContent = sefalanaData.stores.length;
-            document.getElementById('activeSpecials').textContent = sefalanaData.specials.length;
-            document.getElementById('pendingInquiries').textContent = 
-                sefalanaData.supplierInquiries.filter(i => i.status === 'pending').length;
-            
-            renderAdminInquiries();
-        }
-        
-        function renderAdminInquiries() {
-            const inquiriesDiv = document.getElementById('adminInquiries');
-            const pendingInquiries = sefalanaData.supplierInquiries.filter(i => i.status === 'pending');
-            
-            if (pendingInquiries.length === 0) {
-                inquiriesDiv.innerHTML = '<p class="text-gray-500">No pending inquiries.</p>';
-                return;
-            }
-            
-            inquiriesDiv.innerHTML = pendingInquiries.map(inquiry => `
-                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h4 class="font-semibold text-sef-navy">${inquiry.companyName}</h4>
-                            <p class="text-sm text-gray-600">${inquiry.contactPerson}</p>
-                            <p class="text-sm text-gray-600">${inquiry.email}</p>
-                        </div>
-                        <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full">
-                            ${inquiry.status}
-                        </span>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-2">${inquiry.message}</p>
-                    <div class="flex gap-2 mt-3">
-                        <button onclick="updateInquiryStatus(${inquiry.id}, 'contacted')" 
-                                class="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors">
-                            Mark Contacted
-                        </button>
-                        <button onclick="updateInquiryStatus(${inquiry.id}, 'archived')" 
-                                class="px-3 py-1 bg-gray-600 text-white rounded text-sm hover:bg-gray-700 transition-colors">
-                            Archive
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function updateInquiryStatus(inquiryId, status) {
-            const inquiry = sefalanaData.supplierInquiries.find(i => i.id === inquiryId);
-            if (inquiry) {
-                inquiry.status = status;
-                renderAdminInquiries();
-                document.getElementById('pendingInquiries').textContent = 
-                    sefalanaData.supplierInquiries.filter(i => i.status === 'pending').length;
-            }
-        }
-        
-        function adminLogout() {
-            sessionStorage.removeItem('admin_token');
-            sessionStorage.removeItem('admin_user');
-            
-            document.getElementById('adminLoginForm').classList.remove('hidden');
-            document.getElementById('adminDashboard').classList.add('hidden');
-            
-            document.getElementById('adminEmail').value = '';
-            document.getElementById('adminPassword').value = '';
-        }
-        
-        // Initialize Application
-        function initializeApp() {
-            renderStores(sefalanaData.stores);
-            renderSpecials(sefalanaData.specials);
-            
-            const token = sessionStorage.getItem('admin_token');
-            if (token && SecurityUtils.verifyToken(token)) {
-                showAdminDashboard();
-            }
-            
-            console.log('Sefalana Enterprise Website initialized successfully');
-            console.log('Security features enabled: rate limiting, input sanitization, XSS protection');
-            console.log(`Loaded ${sefalanaData.stores.length} stores, ${sefalanaData.specials.length} specials`);
-        }
-        
-        document.addEventListener('DOMContentLoaded', initializeApp);
-        
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+<!-- Admin Portal -->
+<section id="admin" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-sef-navy">Admin Portal</h2>
+      <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
+    </div>
+    <div class="max-w-md mx-auto bg-gray-50 rounded-xl shadow-2xl p-8 border border-gray-200">
+      <div id="adminError" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4"></div>
+      <form id="adminLoginForm" onsubmit="adminLogin(event)" class="space-y-6">
+        <div><label class="block text-sm font-semibold text-gray-700 mb-1">Email</label><input type="email" id="adminEmail" required placeholder="admin@sefalana.co.bw" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"></div>
+        <div><label class="block text-sm font-semibold text-gray-700 mb-1">Password</label><input type="password" id="adminPassword" required minlength="6" placeholder="••••••••" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white"></div>
+        <button type="submit" class="btn-primary w-full py-3 rounded-lg font-bold shadow-lg">Sign In</button>
+      </form>
+      <div id="adminDashboard" class="hidden mt-8">
+        <div class="flex justify-between items-center mb-4"><h3 class="text-2xl font-bold text-sef-navy">Dashboard</h3><button onclick="adminLogout()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm">Logout</button></div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="bg-blue-50 p-4 rounded-lg text-center"><span class="text-3xl font-bold text-sef-navy" id="totalStores">0</span><p class="text-gray-600 text-sm">Stores</p></div>
+          <div class="bg-yellow-50 p-4 rounded-lg text-center"><span class="text-3xl font-bold text-sef-navy" id="activeSpecials">0</span><p class="text-gray-600 text-sm">Specials</p></div>
+          <div class="bg-green-50 p-4 rounded-lg text-center"><span class="text-3xl font-bold text-sef-navy" id="pendingInquiries">0</span><p class="text-gray-600 text-sm">Inquiries</p></div>
+          <div class="bg-purple-50 p-4 rounded-lg text-center"><span class="text-3xl font-bold text-sef-navy">P2.5M</span><p class="text-gray-600 text-sm">Monthly Rev</p></div>
+        </div>
+        <div><h4 class="font-bold text-sef-navy mb-2">Recent Inquiries</h4><div id="adminInquiries" class="space-y-3"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-white py-12 bg-sef-navy border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div><h3 class="text-xl font-bold mb-2">Sefalana Group</h3><p class="text-gray-400 text-sm">Serving Botswana since 1974.</p></div>
+    <div><h3 class="text-xl font-bold mb-2">Quick Links</h3><ul class="space-y-1 text-sm"><li><a href="#specials" class="text-gray-400 hover:text-gold transition">Weekly Specials</a></li><li><a href="#stores" class="text-gray-400 hover:text-gold transition">Store Locator</a></li><li><a href="#supplier" class="text-gray-400 hover:text-gold transition">Become a Supplier</a></li></ul></div>
+    <div><h3 class="text-xl font-bold mb-2">Contact</h3><p class="text-gray-400 text-sm">Plot 54376, Gaborone West</p><p class="text-gray-400 text-sm">Tel: +267 391 4222</p></div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 border-t border-white/10 mt-8 pt-6 text-center text-gray-500 text-sm">© 2026 Sefalana. All rights reserved.</div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+  // ----- DATA (simulated) -----
+  const sefalanaData = {
+    stores: [
+      { id:1, name:'Sefalana Hyper Gaborone', format:'Sefalana Hyper', address:'Plot 54376, Gaborone West', city:'Gaborone', region:'South-East', phone:'+267 391 4222', email:'hyper.gabs@sefalana.co.bw', hours:'Mon-Fri 07:00-19:00', image:'https://images.unsplash.com/photo-1601598851547-4302969d0614?q=80&w=2070&auto=format&fit=crop' },
+      { id:2, name:'Sefalana Shopper Main Mall', format:'Sefalana Shopper', address:'Main Mall, Gaborone', city:'Gaborone', region:'South-East', phone:'+267 397 2153', email:'shopper.main@sefalana.co.bw', hours:'Mon-Fri 08:00-18:00', image:'https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=2070&auto=format&fit=crop' },
+      { id:3, name:'Sefalana Cash & Carry Francistown', format:'Cash & Carry', address:'Plot 2145, Light Industrial', city:'Francistown', region:'North-East', phone:'+267 241 2278', email:'cnc.ftown@sefalana.co.bw', hours:'Mon-Fri 07:30-18:30', image:'https://images.unsplash.com/photo-1583258292688-d02187dcbea8?q=80&w=2070&auto=format&fit=crop' },
+      { id:4, name:'Sefalana Shopper Broadhurst', format:'Sefalana Shopper', address:'Plot 1058, Broadhurst Mall', city:'Broadhurst', region:'South-East', phone:'+267 393 7645', email:'shopper.broadhurst@sefalana.co.bw', hours:'Mon-Fri 08:00-19:00', image:'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=2070&auto=format&fit=crop' },
+      { id:5, name:'Sefalana Hyper Maun', format:'Sefalana Hyper', address:'Plot 78, Maun Industrial', city:'Maun', region:'North-West', phone:'+267 686 0492', email:'hyper.maun@sefalana.co.bw', hours:'Mon-Fri 07:30-19:00', image:'https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop' },
+      { id:6, name:'Sefalana Cash & Carry Mogoditshane', format:'Cash & Carry', address:'Plot 3928, Mogoditshane', city:'Mogoditshane', region:'South-East', phone:'+267 318 9311', email:'cnc.mogo@sefalana.co.bw', hours:'Mon-Fri 07:00-18:30', image:'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop' },
+      { id:7, name:'Sefalana Shopper Selebi-Phikwe', format:'Sefalana Shopper', address:'Plot 2934, Town Centre', city:'Selebi-Phikwe', region:'Central', phone:'+267 261 0756', email:'shopper.spikwe@sefalana.co.bw', hours:'Mon-Fri 08:00-18:00', image:'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=2070&auto=format&fit=crop' }
+    ],
+    specials: [
+      { id:1, comboName:'Tiger Combo', description:'Tiger bread + 2L Coke + 1kg Sugar', originalPrice:89.99, specialPrice:65.00, category:'food', imageUrl:'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop', isFeatured:true, savings:'27.78%' },
+      { id:2, comboName:'Economy Combo', description:'10kg Maize Meal + 2L Oil + 1kg Beans', originalPrice:249.99, specialPrice:199.99, category:'food', imageUrl:'https://images.unsplash.com/photo-1506807803488-8eafc15316c5?q=80&w=2070&auto=format&fit=crop', isFeatured:true, savings:'20.00%' },
+      { id:3, comboName:'Breakfast Pack', description:'2kg Corn Flakes + 2L Milk + 500g Tea', originalPrice:159.99, specialPrice:129.99, category:'food', imageUrl:'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=2070&auto=format&fit=crop', isFeatured:true, savings:'18.75%' },
+      { id:4, comboName:'Braai Day Special', description:'2kg Mixed Meat + 2L Cold Drink + 500g Salad', originalPrice:189.99, specialPrice:149.99, category:'food', imageUrl:'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=2070&auto=format&fit=crop', isFeatured:false, savings:'21.06%' },
+      { id:5, comboName:'Cleaning Essentials', description:'5L Bleach + 2L Dishwash + 500g Powder', originalPrice:129.99, specialPrice:99.99, category:'household', imageUrl:'https://images.unsplash.com/photo-1585421514738-01798e348b17?q=80&w=2070&auto=format&fit=crop', isFeatured:false, savings:'23.08%' },
+      { id:6, comboName:'Student Survival Pack', description:'5kg Rice + 1L Oil + 500g Salt', originalPrice:119.99, specialPrice:89.99, category:'food', imageUrl:'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=2070&auto=format&fit=crop', isFeatured:true, savings:'25.00%' }
+    ],
+    supplierInquiries: [],
+    adminUsers: [{ id:1, email:'admin@sefalana.co.bw', passwordHash:'hashed_12345', fullName:'Admin' }]
+  };
+
+  // ----- helpers -----
+  function sanitize(str) { return str.replace(/<[^>]*>/g, '').trim(); }
+  function validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  function hashPass(p) { let h=0; for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h&=h;} return 'hashed_'+h; }
+
+  // ----- render stores -----
+  function renderStores(stores) {
+    const grid = document.getElementById('storesGrid');
+    if(!stores.length){ grid.innerHTML='<div class="col-span-full text-center py-8 text-gray-500">No stores found.</div>'; return; }
+    grid.innerHTML = stores.map(s => `
+      <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+        <div class="store-image-container h-48"><img src="${s.image}" alt="${s.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop'"></div>
+        <div class="p-5"><h3 class="text-lg font-bold text-sef-navy">${s.name}</h3><span class="inline-block bg-sef-navy text-white text-xs px-3 py-1 rounded-full mt-1">${s.format}</span>
+        <p class="text-sm text-gray-600 mt-2">${s.address}, ${s.city}</p><p class="text-sm">📞 ${s.phone}</p>
+        <button onclick="alert('Store: ${s.name}\\n${s.address}\\n${s.hours}')" class="mt-3 w-full bg-sef-navy text-white py-2 rounded-lg text-sm font-medium hover:bg-[#1a2f4a] transition">View Details</button></div>
+      </div>
+    `).join('');
+  }
+
+  function filterStores() {
+    const q = sanitize(document.getElementById('storeSearch').value.toLowerCase());
+    const city = document.getElementById('cityFilter').value;
+    const fmt = document.getElementById('formatFilter').value;
+    const filtered = sefalanaData.stores.filter(s => {
+      const matchName = s.name.toLowerCase().includes(q) || s.address.toLowerCase().includes(q);
+      return matchName && (!city || s.city===city) && (!fmt || s.format===fmt);
+    });
+    renderStores(filtered);
+  }
+
+  // ----- render specials -----
+  function renderSpecials(list) {
+    const grid = document.getElementById('specialsGrid');
+    if(!list.length){ grid.innerHTML='<div class="col-span-full text-center py-8 text-gray-500">No specials match.</div>'; return; }
+    grid.innerHTML = list.map(sp => `
+      <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="store-image-container h-48 relative"><img src="${sp.imageUrl}" alt="${sp.comboName}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop'">
+        ${sp.isFeatured ? '<span class="absolute top-2 right-2 bg-gold text-sef-navy text-xs font-bold px-2 py-1 rounded-full shadow">⭐ FEATURED</span>' : ''}</div>
+        <div class="p-5"><h3 class="text-xl font-bold text-sef-navy">${sp.comboName}</h3><p class="text-gray-600 text-sm">${sp.description}</p>
+        <div class="flex items-center justify-between mt-3"><span class="text-2xl font-bold text-sef-navy">P${sp.specialPrice.toFixed(2)}</span><span class="text-gray-400 line-through">P${sp.originalPrice.toFixed(2)}</span><span class="savings-badge text-sef-navy text-sm font-semibold px-3 py-1 rounded-full shadow">Save ${sp.savings}</span></div>
+        <button onclick="alert('${sp.comboName} added to cart (demo)')" class="mt-3 w-full btn-primary py-2 rounded-lg font-medium">Add to Cart</button></div>
+      </div>
+    `).join('');
+  }
+
+  function filterSpecials(filter) {
+    document.querySelectorAll('.special-filter').forEach(b => {
+      b.classList.toggle('bg-sef-navy', b.dataset.filter===filter);
+      b.classList.toggle('text-white', b.dataset.filter===filter);
+      b.classList.toggle('bg-white', b.dataset.filter!==filter);
+      b.classList.toggle('text-sef-navy', b.dataset.filter!==filter);
+    });
+    let list = sefalanaData.specials;
+    if(filter==='featured') list = list.filter(s=>s.isFeatured);
+    else if(filter==='food') list = list.filter(s=>s.category==='food');
+    else if(filter==='household') list = list.filter(s=>s.category==='household');
+    renderSpecials(list);
+  }
+
+  // ----- supplier -----
+  function submitSupplierInquiry(e) {
+    e.preventDefault();
+    const name = sanitize(document.getElementById('companyName').value);
+    const person = sanitize(document.getElementById('contactPerson').value);
+    const email = sanitize(document.getElementById('supplierEmail').value);
+    const phone = sanitize(document.getElementById('supplierPhone').value);
+    const msg = sanitize(document.getElementById('supplierMessage').value);
+    if(!validateEmail(email)) return alert('Valid email required.');
+    if(phone.length<10) return alert('Valid phone required (min 10 digits).');
+    sefalanaData.supplierInquiries.push({ id: Date.now(), companyName:name, contactPerson:person, email, phone, message:msg, status:'pending', date:new Date().toISOString() });
+    document.getElementById('supplierSuccess').classList.remove('hidden');
+    document.getElementById('supplierForm').reset();
+    setTimeout(()=>document.getElementById('supplierSuccess').classList.add('hidden'),4000);
+  }
+
+  // ----- admin -----
+  function adminLogin(e) {
+    e.preventDefault();
+    const email = sanitize(document.getElementById('adminEmail').value);
+    const pass = document.getElementById('adminPassword').value;
+    const user = sefalanaData.adminUsers.find(u=>u.email===email);
+    if(!user || hashPass(pass)!==user.passwordHash) {
+      document.getElementById('adminError').textContent='Invalid credentials.';
+      document.getElementById('adminError').classList.remove('hidden');
+      return;
+    }
+    document.getElementById('adminLoginForm').classList.add('hidden');
+    document.getElementById('adminDashboard').classList.remove('hidden');
+    document.getElementById('totalStores').textContent = sefalanaData.stores.length;
+    document.getElementById('activeSpecials').textContent = sefalanaData.specials.length;
+    document.getElementById('pendingInquiries').textContent = sefalanaData.supplierInquiries.filter(i=>i.status==='pending').length;
+    renderAdminInquiries();
+  }
+
+  function renderAdminInquiries() {
+    const div = document.getElementById('adminInquiries');
+    const pending = sefalanaData.supplierInquiries.filter(i=>i.status==='pending');
+    if(!pending.length){ div.innerHTML='<p class="text-gray-500 text-sm">No pending inquiries.</p>'; return; }
+    div.innerHTML = pending.map(i => `
+      <div class="border border-gray-200 rounded-lg p-3 text-sm"><div class="flex justify-between"><span class="font-semibold">${i.companyName}</span><span class="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">${i.status}</span></div>
+      <p class="text-gray-600">${i.contactPerson} · ${i.email}</p><p class="text-gray-500">${i.message}</p>
+      <div class="flex gap-2 mt-2"><button onclick="updateInquiry(${i.id},'contacted')" class="px-3 py-1 bg-blue-600 text-white rounded text-xs">Contacted</button><button onclick="updateInquiry(${i.id},'archived')" class="px-3 py-1 bg-gray-600 text-white rounded text-xs">Archive</button></div></div>
+    `).join('');
+  }
+
+  function updateInquiry(id, status) {
+    const i = sefalanaData.supplierInquiries.find(x=>x.id===id);
+    if(i){ i.status=status; renderAdminInquiries(); document.getElementById('pendingInquiries').textContent = sefalanaData.supplierInquiries.filter(x=>x.status==='pending').length; }
+  }
+
+  function adminLogout() {
+    document.getElementById('adminLoginForm').classList.remove('hidden');
+    document.getElementById('adminDashboard').classList.add('hidden');
+    document.getElementById('adminPassword').value='';
+  }
+
+  // ----- mobile menu -----
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  }
+
+  // ----- init -----
+  document.addEventListener('DOMContentLoaded', function() {
+    renderStores(sefalanaData.stores);
+    renderSpecials(sefalanaData.specials);
+    // smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+    }));
+    // close mobile on link click
+    document.querySelectorAll('#mobileMenu a').forEach(a => a.addEventListener('click', ()=>document.getElementById('mobileMenu').classList.add('hidden')));
+  });
+</script>
 </body>
 </html>
