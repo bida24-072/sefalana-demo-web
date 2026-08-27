@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================ -->
+  <!-- PAGE TITLE & META TAGS                        -->
+  <!-- ============================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sefalana · Shopping Cart</title>
+
+  <!-- ============================================ -->
+  <!-- TAILWIND CSS (CDN)                           -->
+  <!-- ============================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ============================================ -->
+  <!-- CUSTOM STYLES                                -->
+  /* ============================================ */
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f8fafc;
+    }
+
+    /* ----- BRAND COLORS ----- */
+    .bg-sef-navy {
+      background: #0b1a2f;
+    }
+    .text-gold {
+      color: #fbbf24;
+    }
+
+    /* ----- BUTTON STYLES ----- */
+    .btn-primary {
+      background: #0b1a2f;
+      color: white;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #1a2f4a;
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: #fbbf24;
+      color: #0b1a2f;
+      transition: 0.2s;
+    }
+    .btn-gold:hover {
+      background: #f59e0b;
+      transform: translateY(-2px);
+    }
+
+    /* ----- CART ITEM STYLES ----- */
+    .cart-item {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    /* ----- QUANTITY BUTTONS ----- */
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .qty-btn:hover {
+      background: #f3f4f6;
+      border-color: #0b1a2f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
+  /* ============================================ */
+  <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- ----- LOGO SECTION ----- -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
+            <span class="text-sef-navy font-extrabold text-xl">S</span>
+          </div>
+          <div>
+            <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
+            <span class="block text-[10px] uppercase tracking-[0.2em] text-gold font-medium">Shopper</span>
+          </div>
+        </div>
+
+        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
+          <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
+          <a href="store-locator.html" class="text-white/90 hover:text-gold transition">Store Locator</a>
+          <a href="b2b.html" class="text-white/90 hover:text-gold transition">B2B Supplier</a>
+          <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin</a>
+          <a href="cart.html" class="relative text-white/90 hover:text-gold transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">3</span>
+          </a>
+        </div>
+
+        <!-- ----- MOBILE MENU BUTTON ----- -->
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
+      <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
+      <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
+      <a href="store-locator.html" class="block py-2 hover:text-gold transition">Store Locator</a>
+      <a href="b2b.html" class="block py-2 hover:text-gold transition">B2B Supplier</a>
+      <a href="admin.html" class="block py-2 text-gold font-semibold">Admin</a>
+      <a href="cart.html" class="block py-2 hover:text-gold transition">Cart</a>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- SHOPPING CART PAGE                           */
+  /* ============================================ -->
+  <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-4xl font-bold text-sef-navy">Your Shopping Cart</h1>
+    <div class="w-24 h-1 bg-gold my-4 rounded"></div>
+    <p class="text-gray-600 mb-8">Review your items before proceeding to checkout.</p>
+
+    <!-- Cart Container -->
+    <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+
+      <!-- ===== CART ITEMS LIST ===== -->
+      <div class="p-6">
+        <!-- Item 1 -->
+        <div class="cart-item py-4 flex flex-wrap items-center gap-4">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=100&auto=format&fit=crop" alt="Tiger Combo" class="w-20 h-20 object-cover rounded-lg">
+          <div class="flex-1 min-w-[140px]">
+            <h3 class="font-bold text-sef-navy">Tiger Combo</h3>
+            <p class="text-sm text-gray-500">Tiger bread + 2L Coke + 1kg Sugar</p>
+          </div>
+          <!-- Quantity Controls -->
+          <div class="flex items-center gap-2">
+            <button onclick="updateQuantity(this, -1)" class="qty-btn">−</button>
+            <span class="w-8 text-center font-semibold" id="qty-1">1</span>
+            <button onclick="updateQuantity(this, 1)" class="qty-btn">+</button>
+          </div>
+          <!-- Price -->
+          <span class="font-bold text-sef-navy w-20 text-right" id="price-1">P65.00</span>
+          <!-- Remove Button -->
+          <button onclick="removeItem(this)" class="text-red-500 hover:text-red-700 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="cart-item py-4 flex flex-wrap items-center gap-4">
+          <img src="https://images.unsplash.com/photo-1506807803488-8eafc15316c5?q=80&w=100&auto=format&fit=crop" alt="Economy Combo" class="w-20 h-20 object-cover rounded-lg">
+          <div class="flex-1 min-w-[140px]">
+            <h3 class="font-bold text-sef-navy">Economy Combo</h3>
+            <p class="text-sm text-gray-500">10kg Maize Meal + 2L Oil + 1kg Beans</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="updateQuantity(this, -1)" class="qty-btn">−</button>
+            <span class="w-8 text-center font-semibold" id="qty-2">2</span>
+            <button onclick="updateQuantity(this, 1)" class="qty-btn">+</button>
+          </div>
+          <span class="font-bold text-sef-navy w-20 text-right" id="price-2">P399.98</span>
+          <button onclick="removeItem(this)" class="text-red-500 hover:text-red-700 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="cart-item py-4 flex flex-wrap items-center gap-4">
+          <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=100&auto=format&fit=crop" alt="Breakfast Pack" class="w-20 h-20 object-cover rounded-lg">
+          <div class="flex-1 min-w-[140px]">
+            <h3 class="font-bold text-sef-navy">Breakfast Pack</h3>
+            <p class="text-sm text-gray-500">2kg Corn Flakes + 2L Milk + 500g Tea</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="updateQuantity(this, -1)" class="qty-btn">−</button>
+            <span class="w-8 text-center font-semibold" id="qty-3">1</span>
+            <button onclick="updateQuantity(this, 1)" class="qty-btn">+</button>
+          </div>
+          <span class="font-bold text-sef-navy w-20 text-right" id="price-3">P129.99</span>
+          <button onclick="removeItem(this)" class="text-red-500 hover:text-red-700 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== CART SUMMARY ===== -->
+      <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 flex flex-wrap items-center justify-between">
+        <div>
+          <span class="text-gray-600">Subtotal:</span>
+          <span class="font-bold text-sef-navy text-lg" id="cartTotal">P594.97</span>
+        </div>
+        <div class="flex flex-wrap gap-3 mt-3 sm:mt-0">
+          <button onclick="checkout()" class="btn-primary px-8 py-2 rounded-lg font-semibold">Proceed to Checkout</button>
+          <button onclick="clearCart()" class="border border-sef-navy text-sef-navy px-6 py-2 rounded-lg font-semibold hover:bg-sef-navy hover:text-white transition">Clear Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 text-sm text-gray-500">* Demo cart – items are for preview purposes only.</div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       */
+  /* ============================================ -->
+  <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   */
+  /* ============================================ -->
+  <script>
+    // =============================================
+    // CART DATA (Simulated)
+    // =============================================
+
+    // Each item in the cart
+    const cartItems = [{
+      id: 1,
+      name: 'Tiger Combo',
+      price: 65.00,
+      quantity: 1,
+      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=100&auto=format&fit=crop'
+    }, {
+      id: 2,
+      name: 'Economy Combo',
+      price: 199.99,
+      quantity: 2,
+      image: 'https://images.unsplash.com/photo-1506807803488-8eafc15316c5?q=80&w=100&auto=format&fit=crop'
+    }, {
+      id: 3,
+      name: 'Breakfast Pack',
+      price: 129.99,
+      quantity: 1,
+      image: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=100&auto=format&fit=crop'
+    }];
+
+    // =============================================
+    // UPDATE QUANTITY
+    // =============================================
+
+    function updateQuantity(button, change) {
+      // Find the parent cart item container
+      const itemDiv = button.closest('.cart-item');
+      const qtySpan = itemDiv.querySelector('span[id^="qty-"]');
+      const priceSpan = itemDiv.querySelector('span[id^="price-"]');
+
+      // Get current quantity
+      let currentQty = parseInt(qtySpan.textContent);
+      let newQty = currentQty + change;
+
+      // Don't go below 1
+      if (newQty < 1) return;
+
+      // Update the quantity display
+      qtySpan.textContent = newQty;
+
+      // Find the item in our data and update quantity
+      const itemName = itemDiv.querySelector('h3').textContent;
+      const item = cartItems.find(i => i.name === itemName);
+      if (item) {
+        item.quantity = newQty;
+        // Update price display
+        const totalPrice = (item.price * newQty).toFixed(2);
+        priceSpan.textContent = 'P' + totalPrice;
+      }
+
+      // Update the cart total
+      updateCartTotal();
+    }
+
+    // =============================================
+    // REMOVE ITEM
+    // =============================================
+
+    function removeItem(button) {
+      const itemDiv = button.closest('.cart-item');
+      const itemName = itemDiv.querySelector('h3').textContent;
+
+      // Remove from data array
+      const index = cartItems.findIndex(i => i.name === itemName);
+      if (index !== -1) {
+        cartItems.splice(index, 1);
+      }
+
+      // Remove from DOM
+      itemDiv.remove();
+
+      // Update the cart total
+      updateCartTotal();
+
+      // Show message if cart is empty
+      if (cartItems.length === 0) {
+        const container = document.querySelector('.bg-white.rounded-xl');
+        container.innerHTML = `
+            <div class="p-12 text-center">
+              <p class="text-gray-500 text-lg">Your cart is empty.</p>
+              <a href="specials.html" class="btn-primary inline-block mt-4 px-6 py-2 rounded-lg">Start Shopping</a>
+            </div>
+          `;
+      }
+    }
+
+    // =============================================
+    // UPDATE CART TOTAL
+    // =============================================
+
+    function updateCartTotal() {
+      let total = 0;
+      // Calculate total from data array
+      cartItems.forEach(item => {
+        total += item.price * item.quantity;
+      });
+      // Update the total display
+      document.getElementById('cartTotal').textContent = 'P' + total.toFixed(2);
+    }
+
+    // =============================================
+    // CLEAR CART
+    // =============================================
+
+    function clearCart() {
+      if (cartItems.length === 0) return;
+      if (confirm('Are you sure you want to clear your cart?')) {
+        // Clear data array
+        cartItems.length = 0;
+        // Update the UI
+        const container = document.querySelector('.bg-white.rounded-xl');
+        container.innerHTML = `
+            <div class="p-12 text-center">
+              <p class="text-gray-500 text-lg">Your cart is empty.</p>
+              <a href="specials.html" class="btn-primary inline-block mt-4 px-6 py-2 rounded-lg">Start Shopping</a>
+            </div>
+          `;
+      }
+    }
+
+    // =============================================
+    // CHECKOUT
+    // =============================================
+
+    function checkout() {
+      if (cartItems.length === 0) {
+        alert('Your cart is empty. Add some items first!');
+        return;
+      }
+      alert('Thank you for your order! (Demo checkout)');
+    }
+
+    // =============================================
+    // MOBILE MENU TOGGLE
+    // =============================================
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    document.querySelectorAll('#mobileMenu a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
+    );
+
+    // =============================================
+    // INITIALIZE - Set initial totals
+    // =============================================
+    updateCartTotal();
+  </script>
+</body>
+</html>
