@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================ -->
+  <!-- PAGE TITLE & META TAGS                        -->
+  <!-- ============================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sefalana · Admin Portal</title>
+
+  <!-- ============================================ -->
+  <!-- TAILWIND CSS (CDN)                           -->
+  <!-- ============================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ============================================ -->
+  <!-- CUSTOM STYLES                                -->
+  /* ============================================ */
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f8fafc;
+    }
+
+    /* ----- BRAND COLORS ----- */
+    .bg-sef-navy {
+      background: #0b1a2f;
+    }
+    .text-gold {
+      color: #fbbf24;
+    }
+
+    /* ----- BUTTON STYLES ----- */
+    .btn-primary {
+      background: #0b1a2f;
+      color: white;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #1a2f4a;
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: #fbbf24;
+      color: #0b1a2f;
+      transition: 0.2s;
+    }
+    .btn-gold:hover {
+      background: #f59e0b;
+      transform: translateY(-2px);
+    }
+
+    /* ----- FORM INPUT FOCUS ----- */
+    .form-input:focus {
+      outline: none;
+      border-color: #0b1a2f;
+      box-shadow: 0 0 0 3px rgba(11, 26, 47, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
+  /* ============================================ */
+  <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- ----- LOGO SECTION ----- -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
+            <span class="text-sef-navy font-extrabold text-xl">S</span>
+          </div>
+          <div>
+            <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
+            <span class="block text-[10px] uppercase tracking-[0.2em] text-gold font-medium">Shopper</span>
+          </div>
+        </div>
+
+        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
+          <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
+          <a href="store-locator.html" class="text-white/90 hover:text-gold transition">Store Locator</a>
+          <a href="b2b.html" class="text-white/90 hover:text-gold transition">B2B Supplier</a>
+          <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin</a>
+          <a href="cart.html" class="relative text-white/90 hover:text-gold transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">3</span>
+          </a>
+        </div>
+
+        <!-- ----- MOBILE MENU BUTTON ----- -->
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
+      <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
+      <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
+      <a href="store-locator.html" class="block py-2 hover:text-gold transition">Store Locator</a>
+      <a href="b2b.html" class="block py-2 hover:text-gold transition">B2B Supplier</a>
+      <a href="admin.html" class="block py-2 text-gold font-semibold">Admin</a>
+      <a href="cart.html" class="block py-2 hover:text-gold transition">Cart</a>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- ADMIN PORTAL                                 */
+  /* ============================================ -->
+  <section class="py-16 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-4xl md:text-5xl font-bold text-sef-navy">Admin Portal</h1>
+    <div class="w-24 h-1 bg-gold my-4 rounded"></div>
+    <p class="text-gray-600 text-lg mb-8">Secure access for Sefalana staff to manage stores, specials, and supplier inquiries.</p>
+
+    <div class="bg-white rounded-xl shadow-2xl border border-gray-200 p-8">
+
+      <!-- ===== LOGIN FORM ===== -->
+      <div id="adminLoginForm">
+        <!-- Error Message (hidden by default) -->
+        <div id="adminError" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4"></div>
+
+        <form onsubmit="adminLogin(event)" class="space-y-6">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+            <input type="email" id="adminEmail" required placeholder="admin@sefalana.co.bw" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+            <input type="password" id="adminPassword" required minlength="6" placeholder="••••••••" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
+          </div>
+          <button type="submit" class="btn-primary w-full py-3 rounded-lg font-bold shadow-lg">Sign In</button>
+        </form>
+      </div>
+
+      <!-- ===== ADMIN DASHBOARD (hidden until login) ===== -->
+      <div id="adminDashboard" class="hidden">
+        <!-- Dashboard Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-bold text-sef-navy">Dashboard</h3>
+          <button onclick="adminLogout()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition shadow-md">Logout</button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 gap-4 mb-8">
+          <div class="bg-blue-50 p-4 rounded-lg text-center shadow-md">
+            <span class="text-3xl font-bold text-sef-navy" id="totalStores">0</span>
+            <p class="text-gray-600 text-sm">Total Stores</p>
+          </div>
+          <div class="bg-yellow-50 p-4 rounded-lg text-center shadow-md">
+            <span class="text-3xl font-bold text-sef-navy" id="activeSpecials">0</span>
+            <p class="text-gray-600 text-sm">Active Specials</p>
+          </div>
+          <div class="bg-green-50 p-4 rounded-lg text-center shadow-md">
+            <span class="text-3xl font-bold text-sef-navy" id="pendingInquiries">0</span>
+            <p class="text-gray-600 text-sm">Pending Inquiries</p>
+          </div>
+          <div class="bg-purple-50 p-4 rounded-lg text-center shadow-md">
+            <span class="text-3xl font-bold text-sef-navy">P2.5M</span>
+            <p class="text-gray-600 text-sm">Monthly Revenue</p>
+          </div>
+        </div>
+
+        <!-- Recent Inquiries -->
+        <div>
+          <h4 class="font-bold text-sef-navy mb-3">Recent Supplier Inquiries</h4>
+          <div id="adminInquiries" class="space-y-3">
+            <!-- Rendered by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       */
+  /* ============================================ -->
+  <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   */
+  /* ============================================ -->
+  <script>
+    // =============================================
+    // DATA STORE (Simulated Database)
+    // =============================================
+
+    // Admin user credentials (in a real app, this would be on a server)
+    const adminUsers = [{
+      id: 1,
+      email: 'admin@sefalana.co.bw',
+      passwordHash: 'hashed_12345', // In real app, use proper hashing
+      fullName: 'System Administrator',
+      role: 'admin'
+    }];
+
+    // Sample data for dashboard stats
+    const stats = {
+      stores: 8,
+      specials: 6,
+      inquiries: [
+        { id: 1, companyName: 'Botswana Fresh Produce', contactPerson: 'John Kgosi', email: 'john@bfp.co.bw', message: 'We supply fresh vegetables and fruits from local farmers.', status: 'pending' },
+        { id: 2, companyName: 'Kgalagadi Beverages', contactPerson: 'Mary Mokgadi', email: 'mary@kgalagadi.co.bw', message: 'Local beverage manufacturer looking to partner with Sefalana.', status: 'pending' }
+      ]
+    };
+
+    // =============================================
+    // SECURITY UTILITIES
+    // =============================================
+
+    // Simple password hashing (for demo purposes only)
+    function hashPassword(password) {
+      let hash = 0;
+      for (let i = 0; i < password.length; i++) {
+        hash = ((hash << 5) - hash) + password.charCodeAt(i);
+        hash = hash & hash; // Convert to 32-bit integer
+      }
+      return 'hashed_' + hash;
+    }
+
+    // =============================================
+    // ADMIN LOGIN FUNCTION
+    // =============================================
+
+    function adminLogin(event) {
+      // Prevent form from reloading the page
+      event.preventDefault();
+
+      // Get form values
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value;
+
+      // Find user by email
+      const user = adminUsers.find(u => u.email === email);
+
+      // Check if user exists and password matches
+      if (!user || hashPassword(password) !== user.passwordHash) {
+        // Show error message
+        const errorDiv = document.getElementById('adminError');
+        errorDiv.textContent = 'Invalid email or password. Please try again.';
+        errorDiv.classList.remove('hidden');
+        return false;
+      }
+
+      // ----- LOGIN SUCCESS -----
+      // Hide error message
+      document.getElementById('adminError').classList.add('hidden');
+
+      // Hide login form, show dashboard
+      document.getElementById('adminLoginForm').classList.add('hidden');
+      document.getElementById('adminDashboard').classList.remove('hidden');
+
+      // Update dashboard stats
+      document.getElementById('totalStores').textContent = stats.stores;
+      document.getElementById('activeSpecials').textContent = stats.specials;
+      document.getElementById('pendingInquiries').textContent = stats.inquiries.filter(i => i.status === 'pending').length;
+
+      // Render inquiries
+      renderInquiries();
+
+      return false;
+    }
+
+    // =============================================
+    // RENDER INQUIRIES
+    // =============================================
+
+    function renderInquiries() {
+      const container = document.getElementById('adminInquiries');
+      const pending = stats.inquiries.filter(i => i.status === 'pending');
+
+      if (pending.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-sm">No pending inquiries.</p>';
+        return;
+      }
+
+      container.innerHTML = pending.map(i => `
+          <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div class="flex justify-between items-start">
+              <div>
+                <h4 class="font-semibold text-sef-navy">${i.companyName}</h4>
+                <p class="text-sm text-gray-600">${i.contactPerson}</p>
+                <p class="text-sm text-gray-600">${i.email}</p>
+              </div>
+              <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full">${i.status}</span>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">${i.message}</p>
+            <div class="flex gap-2 mt-3">
+              <button onclick="updateInquiry(${i.id}, 'contacted')" class="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition">Mark Contacted</button>
+              <button onclick="updateInquiry(${i.id}, 'archived')" class="px-3 py-1 bg-gray-600 text-white rounded text-sm hover:bg-gray-700 transition">Archive</button>
+            </div>
+          </div>
+        `).join('');
+    }
+
+    // =============================================
+    // UPDATE INQUIRY STATUS
+    // =============================================
+
+    function updateInquiry(id, newStatus) {
+      const inquiry = stats.inquiries.find(i => i.id === id);
+      if (inquiry) {
+        inquiry.status = newStatus;
+        renderInquiries();
+        document.getElementById('pendingInquiries').textContent = stats.inquiries.filter(i => i.status === 'pending').length;
+      }
+    }
+
+    // =============================================
+    // ADMIN LOGOUT
+    // =============================================
+
+    function adminLogout() {
+      // Hide dashboard, show login form
+      document.getElementById('adminDashboard').classList.add('hidden');
+      document.getElementById('adminLoginForm').classList.remove('hidden');
+
+      // Clear password field
+      document.getElementById('adminPassword').value = '';
+    }
+
+    // =============================================
+    // MOBILE MENU TOGGLE
+    // =============================================
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    document.querySelectorAll('#mobileMenu a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
+    );
+  </script>
+</body>
+</html>
