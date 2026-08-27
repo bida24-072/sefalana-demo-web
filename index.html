@@ -16,7 +16,7 @@
 
   <!-- ============================================ -->
   <!-- CUSTOM STYLES                                -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <style>
     /* ----- RESET & BASE ----- */
     * {
@@ -93,48 +93,98 @@
     .store-image-container:hover img {
       transform: scale(1.06);
     }
+
+    /* ----- NAVIGATION LINK STYLES ----- */
+    .nav-link {
+      position: relative;
+      padding-bottom: 4px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #fbbf24;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .nav-link.active {
+      color: #fbbf24;
+    }
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* ----- LOGO TEXT STYLES ----- */
+    .logo-brand {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+    .logo-tagline {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 500;
+      color: #fbbf24;
+      display: block;
+      margin-top: 1px;
+    }
   </style>
 </head>
 <body>
 
   <!-- ============================================ -->
   <!-- NAVIGATION BAR                               -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
+      <div class="flex justify-between items-center h-20">
 
-        <!-- ----- LOGO SECTION ----- -->
+        <!-- ----- LOGO SECTION (UPDATED) ----- -->
         <div class="flex items-center gap-3">
-          <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
-            <span class="text-sef-navy font-extrabold text-xl">S</span>
+          <!-- Sefalana "S" Logo Circle -->
+          <div class="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md overflow-hidden flex-shrink-0">
+            <svg viewBox="0 0 100 100" class="w-10 h-10">
+              <circle cx="50" cy="50" r="48" fill="#0b1a2f" stroke="#fbbf24" stroke-width="2"/>
+              <text x="50" y="64" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#fbbf24">S</text>
+            </svg>
           </div>
+          <!-- Brand Name + Tagline -->
           <div>
-            <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
-            <span class="block text-[10px] uppercase tracking-[0.2em] text-gold font-medium">Shopper</span>
+            <span class="logo-brand text-white">SEFALANA</span>
+            <span class="logo-tagline">SHOPPER</span>
           </div>
         </div>
 
-        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
-        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-          <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
-          <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
-          <a href="store-locator.html" class="text-white/90 hover:text-gold transition">Store Locator</a>
-          <a href="b2b.html" class="text-white/90 hover:text-gold transition">B2B Supplier</a>
-          <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin</a>
-          <a href="cart.html" class="relative text-white/90 hover:text-gold transition">
+        <!-- ----- DESKTOP MENU ----- -->
+        <div class="hidden md:flex items-center space-x-8">
+          <!-- Home is now a regular nav link -->
+          <a href="index.html" class="nav-link active text-gold">Home</a>
+          <a href="specials.html" class="nav-link text-white/80 hover:text-gold transition">Specials</a>
+          <a href="store-locator.html" class="nav-link text-white/80 hover:text-gold transition">Store Locator</a>
+          <a href="b2b.html" class="nav-link text-white/80 hover:text-gold transition">B2B Supplier</a>
+          <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy hover:shadow-xl transition">Admin</a>
+          <a href="cart.html" class="relative text-white/80 hover:text-gold transition">
             <!-- Cart Icon -->
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             <!-- Cart Badge -->
-            <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">3</span>
+            <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center">3</span>
           </a>
         </div>
 
         <!-- ----- MOBILE MENU BUTTON ----- -->
         <div class="md:hidden">
-          <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
+          <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition p-2">
             <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -143,20 +193,20 @@
       </div>
     </div>
 
-    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
+    <!-- ----- MOBILE DROPDOWN MENU ----- -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
-      <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
-      <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
-      <a href="store-locator.html" class="block py-2 hover:text-gold transition">Store Locator</a>
-      <a href="b2b.html" class="block py-2 hover:text-gold transition">B2B Supplier</a>
-      <a href="admin.html" class="block py-2 text-gold font-semibold">Admin</a>
-      <a href="cart.html" class="block py-2 hover:text-gold transition">Cart</a>
+      <a href="index.html" class="block py-3 text-gold font-semibold border-b border-white/10">Home</a>
+      <a href="specials.html" class="block py-3 text-white/80 hover:text-gold transition border-b border-white/10">Specials</a>
+      <a href="store-locator.html" class="block py-3 text-white/80 hover:text-gold transition border-b border-white/10">Store Locator</a>
+      <a href="b2b.html" class="block py-3 text-white/80 hover:text-gold transition border-b border-white/10">B2B Supplier</a>
+      <a href="admin.html" class="block py-3 text-gold font-semibold border-b border-white/10">Admin Portal</a>
+      <a href="cart.html" class="block py-3 text-white/80 hover:text-gold transition">🛒 Cart</a>
     </div>
   </nav>
 
   <!-- ============================================ -->
   <!-- HERO SECTION                                 -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <section class="relative bg-sef-navy text-white overflow-hidden" style="background: linear-gradient(145deg, #0b1a2f 0%, #142b42 100%);">
     <!-- Background Image -->
     <div class="absolute inset-0 opacity-10 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop');"></div>
@@ -166,8 +216,8 @@
       <p class="text-xl md:text-2xl text-gray-300 mt-4">Botswana's Leading FMCG & Retail Wholesale Giant</p>
       <p class="text-gray-400 max-w-2xl mx-auto mt-4">Since 1974 · quality products, unbeatable prices.</p>
       <div class="flex flex-wrap justify-center gap-4 mt-10">
-        <a href="specials.html" class="btn-gold px-10 py-4 rounded-xl font-bold shadow-2xl text-lg">View Specials</a>
-        <a href="store-locator.html" class="bg-white text-sef-navy px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition">Find a Store</a>
+        <a href="specials.html" class="btn-gold px-10 py-4 rounded-xl font-bold shadow-2xl text-lg hover:shadow-3xl transition">View Specials</a>
+        <a href="store-locator.html" class="bg-white text-sef-navy px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl">Find a Store</a>
       </div>
     </div>
 
@@ -184,7 +234,7 @@
 
   <!-- ============================================ -->
   <!-- SPECIALS PREVIEW SECTION                     -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-4xl font-bold text-sef-navy text-center">This Week's Specials</h2>
     <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
@@ -192,13 +242,13 @@
       <!-- Dynamically rendered by JavaScript -->
     </div>
     <div class="text-center mt-8">
-      <a href="specials.html" class="btn-primary px-8 py-3 rounded-lg font-semibold inline-block">View All Specials →</a>
+      <a href="specials.html" class="btn-primary px-8 py-3 rounded-lg font-semibold inline-block hover:shadow-lg transition">View All Specials →</a>
     </div>
   </section>
 
   <!-- ============================================ -->
   <!-- STORE LOCATOR PREVIEW SECTION                -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-sef-navy text-center">Find a Store Near You</h2>
@@ -207,23 +257,23 @@
         <!-- Dynamically rendered -->
       </div>
       <div class="text-center mt-8">
-        <a href="store-locator.html" class="btn-primary px-8 py-3 rounded-lg font-semibold inline-block">View All Stores →</a>
+        <a href="store-locator.html" class="btn-primary px-8 py-3 rounded-lg font-semibold inline-block hover:shadow-lg transition">View All Stores →</a>
       </div>
     </div>
   </section>
 
   <!-- ============================================ -->
   <!-- FOOTER                                       -->
-  /* ============================================ */
+  <!-- ============================================ -->
   <footer class="text-white py-8 bg-sef-navy border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
-      © 2026 Sefalana. All rights reserved.
+      © 2026 Sefalana Group. All rights reserved. | Botswana's Leading Retail Giant
     </div>
   </footer>
 
   <!-- ============================================ -->
-  <!-- JAVASCRIPT                                   */
-  /* ============================================ */
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
   <script>
     // =============================================
     // DATA STORE
