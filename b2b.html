@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ============================================ -->
-  <!-- PAGE TITLE & META TAGS                        -->
-  <!-- ============================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sefalana · B2B Supplier</title>
 
-  <!-- ============================================ -->
-  <!-- TAILWIND CSS (CDN)                           -->
-  <!-- ============================================ -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- ============================================ -->
-  <!-- CUSTOM STYLES                                -->
-  /* ============================================ */
   <style>
-    /* ----- RESET & BASE ----- */
     * {
       margin: 0;
       padding: 0;
@@ -29,7 +19,6 @@
       background: #f8fafc;
     }
 
-    /* ----- BRAND COLORS ----- */
     .bg-sef-navy {
       background: #0b1a2f;
     }
@@ -37,7 +26,6 @@
       color: #fbbf24;
     }
 
-    /* ----- BUTTON STYLES ----- */
     .btn-primary {
       background: #0b1a2f;
       color: white;
@@ -58,7 +46,6 @@
       transform: translateY(-2px);
     }
 
-    /* ----- FORM INPUT FOCUS ----- */
     .form-input:focus {
       outline: none;
       border-color: #0b1a2f;
@@ -68,14 +55,10 @@
 </head>
 <body>
 
-  <!-- ============================================ -->
-  <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
-  /* ============================================ */
   <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
 
-        <!-- ----- LOGO SECTION ----- -->
         <div class="flex items-center gap-3">
           <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
             <span class="text-sef-navy font-extrabold text-xl">S</span>
@@ -86,7 +69,6 @@
           </div>
         </div>
 
-        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
         <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
           <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
           <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
@@ -101,7 +83,6 @@
           </a>
         </div>
 
-        <!-- ----- MOBILE MENU BUTTON ----- -->
         <div class="md:hidden">
           <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
             <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,7 +93,6 @@
       </div>
     </div>
 
-    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
       <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
       <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
@@ -123,23 +103,17 @@
     </div>
   </nav>
 
-  <!-- ============================================ -->
-  <!-- B2B SUPPLIER INQUIRY FORM                    -->
-  /* ============================================ */
   <section class="py-16 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     <h1 class="text-4xl md:text-5xl font-bold text-sef-navy">Become a Supplier</h1>
     <div class="w-24 h-1 bg-gold my-4 rounded"></div>
     <p class="text-gray-600 text-lg mb-8">Partner with Botswana's leading retailer. Submit your business inquiry and our procurement team will contact you.</p>
 
     <div class="bg-white rounded-xl shadow-2xl border border-gray-200 p-8">
-      <!-- Success Message (hidden by default) -->
       <div id="supplierSuccess" class="hidden bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
         ✅ Thank you for your interest! Our team will contact you within 2 business days.
       </div>
 
-      <!-- Supplier Inquiry Form -->
       <form id="supplierForm" onsubmit="submitInquiry(event)" class="space-y-6">
-        <!-- Company Name & Contact Person -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">Company Name *</label>
@@ -151,7 +125,6 @@
           </div>
         </div>
 
-        <!-- Email & Phone -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address *</label>
@@ -163,7 +136,6 @@
           </div>
         </div>
 
-        <!-- Business Type & Revenue -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-1">Business Type</label>
@@ -188,13 +160,11 @@
           </div>
         </div>
 
-        <!-- Message -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-1">Message / Product Details *</label>
           <textarea id="supplierMessage" required minlength="10" rows="4" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="Tell us about your products, services, and why you'd like to partner with Sefalana..."></textarea>
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-lg shadow-lg">
           Submit Inquiry
         </button>
@@ -202,61 +172,40 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- FOOTER                                       -->
-  /* ============================================ */
   <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
     <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
   </footer>
 
-  <!-- ============================================ -->
-  <!-- JAVASCRIPT                                   */
-  /* ============================================ */
   <script>
-    // =============================================
-    // FORM SUBMISSION HANDLER
-    // =============================================
-
-    // Function to handle the supplier inquiry form submission
     function submitInquiry(event) {
-      // Prevent the form from reloading the page
       event.preventDefault();
 
-      // Get form values
       const companyName = document.getElementById('companyName').value.trim();
       const contactPerson = document.getElementById('contactPerson').value.trim();
       const email = document.getElementById('supplierEmail').value.trim();
       const phone = document.getElementById('supplierPhone').value.trim();
       const message = document.getElementById('supplierMessage').value.trim();
 
-      // ----- VALIDATION -----
-      // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         alert('Please enter a valid email address.');
         return false;
       }
 
-      // Validate phone (minimum 10 characters)
       if (phone.length < 10) {
         alert('Please enter a valid phone number (minimum 10 characters).');
         return false;
       }
 
-      // ----- SUCCESS -----
-      // Show success message
       const successDiv = document.getElementById('supplierSuccess');
       successDiv.classList.remove('hidden');
 
-      // Reset the form
       document.getElementById('supplierForm').reset();
 
-      // Hide success message after 5 seconds
       setTimeout(() => {
         successDiv.classList.add('hidden');
       }, 5000);
 
-      // Log the data (in a real app, this would be sent to a server)
       console.log('Supplier Inquiry Submitted:', {
         companyName,
         contactPerson,
@@ -268,16 +217,10 @@
       return false;
     }
 
-    // =============================================
-    // MOBILE MENU TOGGLE
-    // =============================================
-
-    // Function to toggle the mobile menu
     function toggleMobileMenu() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     }
 
-    // Close mobile menu when a link is clicked
     document.querySelectorAll('#mobileMenu a').forEach(a =>
       a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
     );
