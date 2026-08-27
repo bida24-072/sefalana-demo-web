@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ============================================ -->
-  <!-- PAGE TITLE & META TAGS                        -->
-  <!-- ============================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sefalana · Store Locator</title>
 
-  <!-- ============================================ -->
-  <!-- TAILWIND CSS (CDN)                           -->
-  <!-- ============================================ -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- ============================================ -->
-  <!-- CUSTOM STYLES                                -->
-  /* ============================================ */
   <style>
-    /* ----- RESET & BASE ----- */
     * {
       margin: 0;
       padding: 0;
@@ -29,7 +19,6 @@
       background: #f8fafc;
     }
 
-    /* ----- BRAND COLORS ----- */
     .bg-sef-navy {
       background: #0b1a2f;
     }
@@ -37,7 +26,6 @@
       color: #fbbf24;
     }
 
-    /* ----- BUTTON STYLES ----- */
     .btn-primary {
       background: #0b1a2f;
       color: white;
@@ -58,7 +46,6 @@
       transform: translateY(-2px);
     }
 
-    /* ----- HOVER EFFECTS ----- */
     .hover-scale {
       transition: all 0.2s ease;
     }
@@ -67,7 +54,6 @@
       box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
     }
 
-    /* ----- IMAGE HOVER ZOOM ----- */
     .store-image-container {
       overflow: hidden;
     }
@@ -78,28 +64,21 @@
       transform: scale(1.06);
     }
 
-    /* ============================================ */
-    /* BACKGROUND IMAGE (YEARS of creating value)   */
-    /* The SVG creates a repeating "YEARS" pattern  */
-    /* ============================================ */
+    /* Fixed Background Pattern */
     .bg-store-hero {
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMwYjFhMmYiLz48dGV4dCB4PSI2IiB5PSIyNCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNmYmJmMjQiPllFQVJTIDwvdGV4dD48L3N2Zz4=');
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230b1a2f'/%3E%3Ctext x='20' y='60' font-family='Arial, sans-serif' font-size='20' font-weight='bold' fill='%23fbbf24'%3EYEARS%3C/text%3E%3C/svg%3E");
       background-repeat: repeat;
-      background-size: 60px 60px;
+      background-size: 100px 100px;
       background-blend-mode: overlay;
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================ -->
-  <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
-  /* ============================================ */
   <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
 
-        <!-- ----- LOGO SECTION ----- -->
         <div class="flex items-center gap-3">
           <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
             <span class="text-sef-navy font-extrabold text-xl">S</span>
@@ -110,7 +89,6 @@
           </div>
         </div>
 
-        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
         <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
           <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
           <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
@@ -125,7 +103,6 @@
           </a>
         </div>
 
-        <!-- ----- MOBILE MENU BUTTON ----- -->
         <div class="md:hidden">
           <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
             <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +113,6 @@
       </div>
     </div>
 
-    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
       <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
       <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
@@ -147,11 +123,7 @@
     </div>
   </nav>
 
-  <!-- ============================================ -->
-  <!-- HERO WITH BACKGROUND IMAGE (YEARS pattern)   -->
-  /* ============================================ */
   <section class="py-16 relative bg-sef-navy text-white">
-    <!-- The background pattern shows "YEARS" repeated -->
     <div class="absolute inset-0 bg-store-hero opacity-20"></div>
     <div class="relative max-w-7xl mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold">Find a Sefalana Store</h1>
@@ -160,18 +132,13 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- SEARCH & FILTERS                             -->
-  /* ============================================ */
   <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="bg-gray-50 rounded-xl shadow-lg p-6 mb-10 border border-gray-200">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Search Input -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-1">Search</label>
           <input type="text" id="storeSearch" oninput="filterStores()" placeholder="Search by name or address..." class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
         </div>
-        <!-- City Filter -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-1">City</label>
           <select id="cityFilter" onchange="filterStores()" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
@@ -184,7 +151,6 @@
             <option value="Selebi-Phikwe">Selebi-Phikwe</option>
           </select>
         </div>
-        <!-- Format Filter -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-1">Store Format</label>
           <select id="formatFilter" onchange="filterStores()" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white">
@@ -197,26 +163,15 @@
       </div>
     </div>
 
-    <!-- ===== STORE GRID ===== -->
     <div id="storesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Rendered by JavaScript -->
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- FOOTER                                       -->
-  /* ============================================ */
   <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
     <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
   </footer>
 
-  <!-- ============================================ -->
-  <!-- JAVASCRIPT                                   */
-  /* ============================================ -->
   <script>
-    // =============================================
-    // DATA STORE - List of all store locations
-    // =============================================
     const stores = [{
       id: 1,
       name: 'Sefalana Hyper Gaborone',
@@ -273,21 +228,12 @@
       image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400&auto=format&fit=crop'
     }];
 
-    // =============================================
-    // RENDER FUNCTION
-    // =============================================
-
-    // Function to display stores on the page
     function renderStores(list) {
       const grid = document.getElementById('storesGrid');
-
-      // Check if there are any stores to display
       if (!list.length) {
         grid.innerHTML = '<div class="col-span-full text-center py-8 text-gray-500">No stores found matching your criteria.</div>';
         return;
       }
-
-      // Generate HTML for each store
       grid.innerHTML = list.map(s => `
           <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
             <div class="store-image-container h-48">
@@ -306,18 +252,11 @@
         `).join('');
     }
 
-    // =============================================
-    // FILTER FUNCTION
-    // =============================================
-
-    // Function to filter stores based on search and dropdowns
     function filterStores() {
-      // Get values from input fields
       const searchTerm = document.getElementById('storeSearch').value.toLowerCase().trim();
       const cityFilter = document.getElementById('cityFilter').value;
       const formatFilter = document.getElementById('formatFilter').value;
 
-      // Filter the stores array
       const filtered = stores.filter(s => {
         const matchesSearch = !searchTerm ||
           s.name.toLowerCase().includes(searchTerm) ||
@@ -330,21 +269,14 @@
       renderStores(filtered);
     }
 
-    // =============================================
-    // MOBILE MENU TOGGLE
-    // =============================================
     function toggleMobileMenu() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     }
 
-    // Close mobile menu when a link is clicked
     document.querySelectorAll('#mobileMenu a').forEach(a =>
       a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
     );
 
-    // =============================================
-    // INITIALIZE PAGE
-    // =============================================
     renderStores(stores);
   </script>
 </body>
