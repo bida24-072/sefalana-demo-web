@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ============================================ -->
-  <!-- PAGE TITLE & META TAGS                        -->
-  <!-- ============================================ -->
+  <!-- PAGE TITLE & META TAGS -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Sefalana - Botswana's Leading FMCG & Retail Wholesale Giant" />
   <title>Sefalana · Home</title>
 
-  <!-- ============================================ -->
-  <!-- TAILWIND CSS (CDN)                           -->
-  <!-- ============================================ -->
+  <!-- TAILWIND CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- ============================================ -->
-  <!-- CUSTOM STYLES                                -->
-  <!-- ============================================ -->
+  <!-- CUSTOM STYLES -->
   <style>
     /* ----- RESET & BASE ----- */
     * {
@@ -141,14 +135,12 @@
 </head>
 <body>
 
-  <!-- ============================================ -->
-  <!-- NAVIGATION BAR                               -->
-  <!-- ============================================ -->
+  <!-- NAVIGATION BAR -->
   <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
 
-        <!-- ----- LOGO SECTION (UPDATED) ----- -->
+        <!-- LOGO SECTION -->
         <div class="flex items-center gap-3">
           <!-- Sefalana "S" Logo Circle -->
           <div class="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-md overflow-hidden flex-shrink-0">
@@ -164,7 +156,7 @@
           </div>
         </div>
 
-        <!-- ----- DESKTOP MENU ----- -->
+        <!-- DESKTOP MENU -->
         <div class="hidden md:flex items-center space-x-8">
           <!-- Home is now a regular nav link -->
           <a href="index.html" class="nav-link active text-gold">Home</a>
@@ -182,7 +174,7 @@
           </a>
         </div>
 
-        <!-- ----- MOBILE MENU BUTTON ----- -->
+        <!-- MOBILE MENU BUTTON -->
         <div class="md:hidden">
           <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition p-2">
             <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,7 +185,7 @@
       </div>
     </div>
 
-    <!-- ----- MOBILE DROPDOWN MENU ----- -->
+    <!-- MOBILE DROPDOWN MENU -->
     <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
       <a href="index.html" class="block py-3 text-gold font-semibold border-b border-white/10">Home</a>
       <a href="specials.html" class="block py-3 text-white/80 hover:text-gold transition border-b border-white/10">Specials</a>
@@ -204,9 +196,7 @@
     </div>
   </nav>
 
-  <!-- ============================================ -->
-  <!-- HERO SECTION                                 -->
-  <!-- ============================================ -->
+  <!-- HERO SECTION -->
   <section class="relative bg-sef-navy text-white overflow-hidden" style="background: linear-gradient(145deg, #0b1a2f 0%, #142b42 100%);">
     <!-- Background Image -->
     <div class="absolute inset-0 opacity-10 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=2070&auto=format&fit=crop');"></div>
@@ -220,7 +210,7 @@
         <a href="store-locator.html" class="bg-yellow-400 text-black px-10 py-4 rounded-xl font-bold hover:bg-yellow-500 transition shadow-xl">Find a Store</a>
     </div>
 
-    <!-- ----- STATS BAR ----- -->
+    <!-- STATS BAR -->
     <div class="relative bg-black/30 backdrop-blur-sm border-t border-white/10 py-6">
       <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
         <div><span class="text-4xl font-bold text-gold">50+</span><p class="text-xs text-gray-300">Years</p></div>
@@ -231,9 +221,7 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- SPECIALS PREVIEW SECTION                     -->
-  <!-- ============================================ -->
+  <!-- SPECIALS PREVIEW SECTION -->
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-4xl font-bold text-sef-navy text-center">This Week's Specials</h2>
     <div class="w-24 h-1 bg-gold mx-auto my-4 rounded"></div>
@@ -245,9 +233,7 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- STORE LOCATOR PREVIEW SECTION                -->
-  <!-- ============================================ -->
+  <!-- STORE LOCATOR PREVIEW SECTION -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-sef-navy text-center">Find a Store Near You</h2>
@@ -261,22 +247,16 @@
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!-- FOOTER                                       -->
-  <!-- ============================================ -->
+  <!-- FOOTER -->
   <footer class="text-white py-8 bg-sef-navy border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
       © 2026 Sefalana Group. All rights reserved. | Botswana's Leading Retail Giant
     </div>
   </footer>
 
-  <!-- ============================================ -->
-  <!-- JAVASCRIPT                                   -->
-  <!-- ============================================ -->
+  <!-- JAVASCRIPT -->
   <script>
-    // =============================================
     // DATA STORE
-    // =============================================
     // Array of special offers
     const specials = [{
       id: 1,
@@ -331,9 +311,7 @@
       image: 'https://images.unsplash.com/photo-1583258292688-d02187dcbea8?q=80&w=400&auto=format&fit=crop'
     }];
 
-    // =============================================
     // RENDER FUNCTIONS
-    // =============================================
 
     // Function to display specials on the page
     function renderSpecials(list) {
@@ -375,9 +353,7 @@
         `).join('');
     }
 
-    // =============================================
     // MOBILE MENU TOGGLE
-    // =============================================
     function toggleMobileMenu() {
       document.getElementById('mobileMenu').classList.toggle('hidden');
     }
@@ -387,9 +363,7 @@
       a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
     );
 
-    // =============================================
     // INITIALIZE PAGE
-    // =============================================
     renderSpecials(specials);
     renderStores(stores);
   </script>
