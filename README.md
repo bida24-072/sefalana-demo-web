@@ -1,4 +1,11 @@
+
 # 🏪 SEFALANA RETAIL WEBSITE
+
+### *Botswana's Leading FMCG & Retail Wholesale Giant*
+
+---
+
+## 🏢 SEFALANA BRAND LOGO
 
 ### *Botswana's Leading FMCG & Retail Wholesale Giant*
 
