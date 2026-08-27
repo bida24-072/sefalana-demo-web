@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================ -->
+  <!-- PAGE TITLE & META TAGS                        -->
+  <!-- ============================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sefalana · Weekly Specials</title>
+
+  <!-- ============================================ -->
+  <!-- TAILWIND CSS (CDN)                           -->
+  <!-- ============================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- ============================================ -->
+  <!-- CUSTOM STYLES                                -->
+  /* ============================================ */
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f8fafc;
+    }
+
+    /* ----- BRAND COLORS ----- */
+    .bg-sef-navy {
+      background: #0b1a2f;
+    }
+    .text-gold {
+      color: #fbbf24;
+    }
+
+    /* ----- BUTTON STYLES ----- */
+    .btn-primary {
+      background: #0b1a2f;
+      color: white;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: #1a2f4a;
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: #fbbf24;
+      color: #0b1a2f;
+      transition: 0.2s;
+    }
+    .btn-gold:hover {
+      background: #f59e0b;
+      transform: translateY(-2px);
+    }
+
+    /* ----- HOVER EFFECTS ----- */
+    .hover-scale {
+      transition: all 0.2s ease;
+    }
+    .hover-scale:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ----- SAVINGS BADGE ANIMATION ----- */
+    .savings-badge {
+      background: linear-gradient(145deg, #fbbf24, #f59e0b);
+      animation: pulse-soft 2s infinite;
+    }
+    @keyframes pulse-soft {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.04);
+      }
+    }
+
+    /* ----- IMAGE HOVER ZOOM ----- */
+    .store-image-container {
+      overflow: hidden;
+    }
+    .store-image-container img {
+      transition: transform 0.4s ease;
+    }
+    .store-image-container:hover img {
+      transform: scale(1.06);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVIGATION BAR (LINKED TO ALL PAGES)         -->
+  /* ============================================ */
+  <nav class="bg-sef-navy text-white sticky top-0 z-50 shadow-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- ----- LOGO SECTION ----- -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md overflow-hidden">
+            <span class="text-sef-navy font-extrabold text-xl">S</span>
+          </div>
+          <div>
+            <span class="text-2xl font-bold tracking-wider text-white">SEFALANA</span>
+            <span class="block text-[10px] uppercase tracking-[0.2em] text-gold font-medium">Shopper</span>
+          </div>
+        </div>
+
+        <!-- ----- DESKTOP MENU (LINKS TO ALL PAGES) ----- -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="index.html" class="text-white/90 hover:text-gold transition">Home</a>
+          <a href="specials.html" class="text-white/90 hover:text-gold transition">Specials</a>
+          <a href="store-locator.html" class="text-white/90 hover:text-gold transition">Store Locator</a>
+          <a href="b2b.html" class="text-white/90 hover:text-gold transition">B2B Supplier</a>
+          <a href="admin.html" class="btn-gold px-5 py-2 rounded-lg font-semibold shadow-lg text-sef-navy">Admin</a>
+          <a href="cart.html" class="relative text-white/90 hover:text-gold transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="absolute -top-1 -right-2 bg-red-500 text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">3</span>
+          </a>
+        </div>
+
+        <!-- ----- MOBILE MENU BUTTON ----- -->
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-white focus:outline-none hover:text-gold transition">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ----- MOBILE DROPDOWN MENU (LINKS TO ALL PAGES) ----- -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#0e2238] border-t border-white/10 px-4 pb-4">
+      <a href="index.html" class="block py-2 hover:text-gold transition">Home</a>
+      <a href="specials.html" class="block py-2 hover:text-gold transition">Specials</a>
+      <a href="store-locator.html" class="block py-2 hover:text-gold transition">Store Locator</a>
+      <a href="b2b.html" class="block py-2 hover:text-gold transition">B2B Supplier</a>
+      <a href="admin.html" class="block py-2 text-gold font-semibold">Admin</a>
+      <a href="cart.html" class="block py-2 hover:text-gold transition">Cart</a>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- PAGE HEADER                                  -->
+  /* ============================================ */
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-4xl md:text-5xl font-bold text-sef-navy">Weekly Specials</h1>
+    <div class="w-24 h-1 bg-gold my-4 rounded"></div>
+    <p class="text-gray-600 max-w-2xl text-lg">Unbeatable deals at all Sefalana stores. Limited time.</p>
+
+    <!-- ===== FILTER BUTTONS ===== -->
+    <div class="flex flex-wrap gap-3 mt-6">
+      <button onclick="filterSpecials('all')" class="px-6 py-2 rounded-full font-medium bg-sef-navy text-white shadow">All</button>
+      <button onclick="filterSpecials('featured')" class="px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md">Featured</button>
+      <button onclick="filterSpecials('food')" class="px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md">Food</button>
+      <button onclick="filterSpecials('household')" class="px-6 py-2 rounded-full font-medium bg-white text-sef-navy shadow hover:shadow-md">Household</button>
+    </div>
+
+    <!-- ===== SPECIALS GRID ===== -->
+    <div id="specialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+      <!-- Rendered by JavaScript -->
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                       -->
+  /* ============================================ */
+  <footer class="text-white py-8 bg-sef-navy border-t border-white/10 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">© 2026 Sefalana. All rights reserved.</div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   */
+  /* ============================================ */
+  <script>
+    // =============================================
+    // DATA STORE
+    // =============================================
+    // Full list of specials with categories
+    const allSpecials = [{
+      id: 1,
+      comboName: 'Tiger Combo',
+      description: 'Tiger bread + 2L Coke + 1kg Sugar',
+      originalPrice: 89.99,
+      specialPrice: 65.00,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop',
+      isFeatured: true,
+      savings: '27.78%'
+    }, {
+      id: 2,
+      comboName: 'Economy Combo',
+      description: '10kg Maize Meal + 2L Oil + 1kg Beans',
+      originalPrice: 249.99,
+      specialPrice: 199.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1506807803488-8eafc15316c5?q=80&w=400&auto=format&fit=crop',
+      isFeatured: true,
+      savings: '20.00%'
+    }, {
+      id: 3,
+      comboName: 'Breakfast Pack',
+      description: '2kg Corn Flakes + 2L Milk + 500g Tea',
+      originalPrice: 159.99,
+      specialPrice: 129.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?q=80&w=400&auto=format&fit=crop',
+      isFeatured: true,
+      savings: '18.75%'
+    }, {
+      id: 4,
+      comboName: 'Braai Day Special',
+      description: '2kg Mixed Meat + 2L Cold Drink + 500g Salad',
+      originalPrice: 189.99,
+      specialPrice: 149.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '21.06%'
+    }, {
+      id: 5,
+      comboName: 'Cleaning Essentials',
+      description: '5L Bleach + 2L Dishwash + 500g Powder',
+      originalPrice: 129.99,
+      specialPrice: 99.99,
+      category: 'household',
+      imageUrl: 'https://images.unsplash.com/photo-1585421514738-01798e348b17?q=80&w=400&auto=format&fit=crop',
+      isFeatured: false,
+      savings: '23.08%'
+    }, {
+      id: 6,
+      comboName: 'Student Survival Pack',
+      description: '5kg Rice + 1L Oil + 500g Salt',
+      originalPrice: 119.99,
+      specialPrice: 89.99,
+      category: 'food',
+      imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=400&auto=format&fit=crop',
+      isFeatured: true,
+      savings: '25.00%'
+    }];
+
+    // =============================================
+    // RENDER FUNCTION
+    // =============================================
+
+    // Function to display specials on the page
+    function renderSpecials(list) {
+      const grid = document.getElementById('specialsGrid');
+
+      // Check if there are any specials to display
+      if (!list.length) {
+        grid.innerHTML = '<div class="col-span-full text-center text-gray-500">No specials found.</div>';
+        return;
+      }
+
+      // Generate HTML for each special
+      grid.innerHTML = list.map(sp => `
+          <div class="hover-scale bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="store-image-container h-48 relative">
+              <img src="${sp.imageUrl}" alt="${sp.comboName}" class="w-full h-full object-cover" loading="lazy">
+              ${sp.isFeatured ? '<span class="absolute top-2 right-2 bg-gold text-sef-navy text-xs font-bold px-2 py-1 rounded-full shadow">⭐ FEATURED</span>' : ''}
+            </div>
+            <div class="p-5">
+              <h3 class="text-xl font-bold text-sef-navy">${sp.comboName}</h3>
+              <p class="text-gray-600 text-sm">${sp.description}</p>
+              <div class="flex items-center justify-between mt-3">
+                <span class="text-2xl font-bold text-sef-navy">P${sp.specialPrice.toFixed(2)}</span>
+                <span class="text-gray-400 line-through">P${sp.originalPrice.toFixed(2)}</span>
+                <span class="savings-badge text-sef-navy text-sm font-semibold px-3 py-1 rounded-full">Save ${sp.savings}</span>
+              </div>
+              <button onclick="alert('${sp.comboName} added to cart')" class="mt-3 w-full btn-primary py-2 rounded-lg font-medium">Add to Cart</button>
+            </div>
+          </div>
+        `).join('');
+    }
+
+    // =============================================
+    // FILTER FUNCTION
+    // =============================================
+
+    // Function to filter specials by category
+    function filterSpecials(filter) {
+      let list = allSpecials;
+
+      // Apply filter based on the button clicked
+      if (filter === 'featured') {
+        list = allSpecials.filter(s => s.isFeatured);
+      } else if (filter === 'food') {
+        list = allSpecials.filter(s => s.category === 'food');
+      } else if (filter === 'household') {
+        list = allSpecials.filter(s => s.category === 'household');
+      }
+      // 'all' shows everything
+
+      renderSpecials(list);
+    }
+
+    // =============================================
+    // MOBILE MENU TOGGLE
+    // =============================================
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('#mobileMenu a').forEach(a =>
+      a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'))
+    );
+
+    // =============================================
+    // INITIALIZE PAGE
+    // =============================================
+    renderSpecials(allSpecials);
+  </script>
+</body>
+</html>
